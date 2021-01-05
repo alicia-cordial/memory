@@ -9,7 +9,7 @@ class User{
     private $db;    
 
 
-    
+
 
 //S'ENREGISTRER
  function register($login, $password, $password2){
@@ -97,8 +97,10 @@ function update($login, $password, $password2)
     $login = htmlspecialchars($login);
     $this->password = htmlspecialchars($password);
     $this->password2 = htmlspecialchars($password2);
+    
     $stmt = $this->db->prepare('SELECT * FROM utilisateurs WHERE login= ?');
     $stmt->execute([$login]);
+    
     $userExists = $stmt->rowCount();
     $userfetch = $stmt->fetch();
 
