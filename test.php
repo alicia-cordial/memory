@@ -1,6 +1,6 @@
 <?php
-
-/*$login = 'may';
+require_once("classes/database.php");
+$login = 'may';
 $password = "may";
 
 $pdo = new database();
@@ -15,4 +15,4 @@ $test = $pdo->Update("Update utilisateurs set login = :login where id = :id",[
         'id' => 3,
         'login' => 'may2'
     ]);
-var_dump($test);*/
+var_dump($test);

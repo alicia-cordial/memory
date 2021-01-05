@@ -1,26 +1,18 @@
 <?php
 
+require_once('database.php');
+require_once('user.php');
+
+
+//$pdo = new database();
+
 class Validator{
     private $id;
     private $login;
     private $password;
     private $password2;
     private $status;
-    private $db;    
-
-
-//connexion base données
-
-function dbConnect() 
-{
-    try {
-        $db = new PDO('mysql:host=localhost;dbname=memory;charset=utf8', 'root', '');
-        return $db;
-
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-}
+   // private $pdo = new database();    
 
 
 
@@ -28,20 +20,20 @@ function dbConnect()
 
 function userExists($login) 
 {
-    $db = dbConnect();
+     $pdo = new database();    
     
-    $check = $db->prepare('SELECT * FROM utilisateurs WHERE login =?');
-    $check->execute([$login]);
+    $check = $pdo->Execute('SELECT * FROM utilisateurs WHERE login =?', [$login]);
 
     $userExists = $check->rowCount();
     $user = $check->fetch();
 
     if ($userExists == 1) {
 
-        $this->id = $user['id'];
-        $this->login = $user['login'];
-        $this->password = $user['password'];
-        header("Location: profil.php?id=".$this->id);
+     
+//$this->login = htmlspecialchars($login);
+//$this->password = htmlspecialchars($password);
+//$this->password2 = htmlspecialchars($password2);
+
 
         return $user;
 
@@ -49,7 +41,6 @@ function userExists($login)
         return 0;
     }
 }
-
 
 
 
@@ -73,8 +64,8 @@ function sameLogin($login)
 
 function updateUser($login, $hashed_password) 
 {
-    $db = dbConnect();
-    $insertnewdata = $db->prepare('UPDATE utilisateurs SET login = ?, password = ? WHERE id = ?');
+   
+    $insertnewdata = $this->pdo->Execute('UPDATE utilisateurs SET login = ?, password = ? WHERE id = ?');
     $insertnewdata->execute(array($login, $hashed_password, $this->id));
     
     $this->login = $login;
@@ -88,8 +79,7 @@ function updateUser($login, $hashed_password)
 
 function passwordExists($login, $password) 
 {
-    $db = dbConnect();
-    $sqlcheck = $db->prepare('SELECT * from utilisateurs WHERE login =?');
+    $sqlcheck = $this->pdo->Execute('SELECT * from utilisateurs WHERE login =?');
     $sqlcheck->execute([$login]);
     
     $user = $sqlcheck->fetch();
@@ -134,15 +124,14 @@ function passwordConfirm($password, $password2)
 
 function createUser($login, $hashed_password) 
 {
-    $db = dbConnect();
 
-    $sql = $db->prepare('INSERT INTO utilisateurs (login, password) VALUES (?,?)');
+
+    $sql = $this->pdo->Execute('INSERT INTO utilisateurs (login, password) VALUES (?,?)');
     $sql->execute(array($login, $hashed_password));
     return 1;
 }
 
 
 }
-
 
 ?>
