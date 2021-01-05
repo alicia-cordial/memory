@@ -59,7 +59,7 @@ function connect($login, $password){
     $this->login = htmlspecialchars($login);
     $this->password = htmlspecialchars($password);
 
-    $db = new PDO('mysql:host=localhost;dbname=reservationsalles', 'root', '');
+    $db = new PDO('mysql:host=localhost;dbname=memory', 'root', '');
     $requser = $db->prepare("SELECT * FROM utilisateurs WHERE login = ? AND password = ?");
     
     $requser->execute(array($login, $password));
