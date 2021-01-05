@@ -1,14 +1,16 @@
 <?php
+require_once('../includes/config.php');
 
 class database
 {
     private $connection;
 
-//Connexion
-    public function __construct($host, $user, $password, $table)
+    //Connexion
+    public function __construct()
     {
         try {
-            $this->connection = new PDO($host, $table, $user, $password);
+            $this->connection = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET,
+                DB_USER, DB_PASSWORD);
             return $this->connection;
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
@@ -21,7 +23,7 @@ class database
         $this->connection = NULL;
     }
 
-//Exécution d'une requête
+    //Exécution d'une requête
     public function Execute($statement = '', $parameters = [])
     {
         try {
@@ -82,5 +84,3 @@ class database
     }
 
 }
-
-?>
