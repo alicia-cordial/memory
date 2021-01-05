@@ -16,6 +16,8 @@ class User{
         $this->pdo = new database();
     }
 
+
+
 //S'ENREGISTRER
 
  function register($login, $password){
@@ -24,12 +26,71 @@ class User{
             'login' => $login,
             'password' => $password,
         ]);
-     return $login;
+
     } 
+
+
+
+//SE CONNECTER
+
+function connect($login, $password){
+
+    $requser = $this->pdo->Select( 'Select * FROM utilisateurs WHERE login = :login AND password = :password ' , [
+        'login' => $login,
+        'password' => $password,
+    ]);
 
 
 }
 
-//$user = new User('lila', 'lila');
-//var_dump($user->register('lila', 'lila'));
+//UPDATE
+
+function update($login, $password)
+{
+  
+    $update = $this->pdo->Update("Update utilisateurs set login = :login where id = :id",[
+        'id' => $login,
+        'login' => $password
+    ]);
+
+
+}
+
+//GETID
+
+
+function getId(){
+    return $this->id;
+    }
+    
+        
+
+//GETLOGIN
+
+function getLogin(){
+    return $this->login;
+    }
+
+
+//GETSTATUS
+
+function getStatus()
+    {
+        return $this->status;
+    }
+
+
+//DESTRUCTION
+
+function __destruct()
+    {
+        $this->db = NULL;
+    }
+
+
+
+//DECONNEXION
+
+}
+
 ?>
