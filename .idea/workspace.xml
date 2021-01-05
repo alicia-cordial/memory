@@ -20,12 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2539edfb-f14f-46db-bbe8-63b4536a1ed4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/classes/board.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/board.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/card.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/card.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/score.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/score.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/validator.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/validator.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609774878516</updated>
       <workItem from="1609774880138" duration="2234000" />
+      <workItem from="1609838371302" duration="2960000" />
     </task>
     <servers />
   </component>
@@ -79,6 +77,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="446" y="643" key="NewPhpFileDialog" timestamp="1609774910532">
