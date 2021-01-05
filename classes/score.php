@@ -1,6 +1,11 @@
 <?php
 
 class score {
+    private $id;
+    public $level;
+    public $time;
+    public $moves;
+    public $db;
 
     //INSERER SCORE
 
