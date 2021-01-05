@@ -1,2 +1,6 @@
 <?php
+
+class board {
+
+}
 ?>

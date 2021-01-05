@@ -1,2 +1,8 @@
 <?php
+
+class card {
+
+
+
+}
 ?>
