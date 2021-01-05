@@ -33,7 +33,7 @@ class database
         }
     }
 
-    //Insertion d'une ligne
+    //Insertion de données
     public function Insert($statement = '', $parameters = [])
     {
         try {
@@ -57,7 +57,7 @@ class database
         }
     }
 
-    //Mise à jour des données
+    //Mise à jour de données
     public function Update($statement = "", $parameters = [])
     {
         try {
