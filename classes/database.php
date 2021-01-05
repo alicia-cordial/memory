@@ -2,35 +2,85 @@
 
 class database
 {
+    private $connection;
 
-    private $host;
-    private $user;
-    private $password;
-    private $table;
-    private $db;
-
+//Connexion
     public function __construct($host, $user, $password, $table)
     {
-        $this->host = $host;
-        $this->user = $user;
-        $this->password = $password;
-        $this->table = $table;
-    }
-
-    public function connect()
-    {
         try {
-            $this->db = new PDO("mysql:host=$this->host;dbname=$this->table", $this->user, $this->password);
-            return $this->db;
+            $this->connection = new PDO($host, $table, $user, $password);
+            return $this->connection;
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
         }
     }
 
+    //Déconnexion
     public function disconnect()
     {
-        $this->db->close();
+        $this->connection = NULL;
     }
+
+//Exécution d'une requête
+    public function Execute($statement = '', $parameters = [])
+    {
+        try {
+            $stmt = $this->connection->prepare($statement);
+            $stmt->execute($parameters);
+            return $stmt;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    //Insertion de données
+    public function Insert($statement = '', $parameters = [])
+    {
+        try {
+            $this->Execute($statement, $parameters);
+            return $this->connection->lastInsertId();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    //Récupération de données
+    public function Select($statement = "", $parameters = [])
+    {
+        try {
+
+            $stmt = $this->Execute($statement, $parameters);
+            return $stmt->fetchAll();
+
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    //Mise à jour de données
+    public function Update($statement = "", $parameters = [])
+    {
+        try {
+
+            $this->Execute($statement, $parameters);
+
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    //Suppression de données
+    public function Delete($statement = "", $parameters = [])
+    {
+        try {
+
+            $this->Execute($statement, $parameters);
+
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
 }
 
 ?>

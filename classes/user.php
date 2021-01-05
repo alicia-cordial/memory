@@ -9,12 +9,8 @@ class User{
     private $db;    
 
 
-
-
 //S'ENREGISTRER
  function register($login, $password, $password2){
-  
-    $db = new PDO('mysql:host=localhost;dbname=memory', 'root', '');
 
     $this->login = htmlspecialchars($login);
     $this->password = htmlspecialchars($password);
