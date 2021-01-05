@@ -35,7 +35,7 @@ class User{
                 $this->status = "notsame";
                 return 0;
 
-<<<<<<< Updated upstream
+
             } else {
                 $hashed_password = password_hash($this->password, PASSWORD_BCRYPT, ["cost" => 10]);
             }
@@ -51,9 +51,6 @@ class User{
         }
     }
  
-=======
-//SE DECONNECTER
->>>>>>> Stashed changes
 
 //SE CONNECTER
 
