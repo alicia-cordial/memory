@@ -92,8 +92,6 @@ function connect($login, $password){
 }
 
 
-<<<<<<< Updated upstream
-
 
 //UPDATE
 
@@ -139,11 +137,6 @@ function update($login, $password, $password2)
 
 
 //DECONNEXION
-=======
-//GETLOGIN
->>>>>>> Stashed changes
-
-
 
 
 //GETID
