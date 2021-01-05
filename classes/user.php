@@ -8,7 +8,6 @@ class User{
     private $id;
     private $login;
     private $password;
-    private $status;
     private $pdo;
 
     function __construct()
@@ -48,9 +47,9 @@ function connect($login, $password){
 function update($login, $password)
 {
   
-    $update = $this->pdo->Update("Update utilisateurs set login = :login where id = :id",[
-        'id' => $login,
-        'login' => $password
+    $update = $this->pdo->Update("Update utilisateurs set login = :login, password = :password where id = $this->id ",[
+        'login' => $login,
+        'password' => $password
     ]);
 
 
@@ -72,24 +71,19 @@ function getLogin(){
     }
 
 
-//GETSTATUS
-
-function getStatus()
-    {
-        return $this->status;
-    }
-
-
-//DESTRUCTION
-
-function __destruct()
-    {
-        $this->db = NULL;
-    }
-
-
 
 //DECONNEXION
+
+function disconnect(){ 
+    
+    $this->id = NULL;
+    $this->login = NULL;
+    $this->password = NULL;
+    $this->pdo = NULL;
+
+    
+}
+
 
 }
 
