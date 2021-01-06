@@ -8,13 +8,14 @@ class User{
     private $id;
     private $login;
     private $password;
-    private $status;
     private $pdo;
 
     function __construct()
     {
         $this->pdo = new database();
     }
+
+
 
 //S'ENREGISTRER
 
@@ -24,12 +25,66 @@ class User{
             'login' => $login,
             'password' => $password,
         ]);
-     return $login;
+
     } 
+
+
+
+//SE CONNECTER
+
+function connect($login, $password){
+
+    $requser = $this->pdo->Select( 'Select * FROM utilisateurs WHERE login = :login AND password = :password ' , [
+        'login' => $login,
+        'password' => $password,
+    ]);
 
 
 }
 
-//$user = new User('lila', 'lila');
-//var_dump($user->register('lila', 'lila'));
+//UPDATE
+
+function update($login, $password)
+{
+  
+    $update = $this->pdo->Update("Update utilisateurs set login = :login, password = :password where id = $this->id ",[
+        'login' => $login,
+        'password' => $password
+    ]);
+
+
+}
+
+//GETID
+
+
+function getId(){
+    return $this->id;
+    }
+    
+        
+
+//GETLOGIN
+
+function getLogin(){
+    return $this->login;
+    }
+
+
+
+//DECONNEXION
+
+function disconnect(){ 
+    
+    $this->id = NULL;
+    $this->login = NULL;
+    $this->password = NULL;
+    $this->pdo = NULL;
+
+    
+}
+
+
+}
+
 ?>
