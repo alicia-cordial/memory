@@ -6,7 +6,9 @@ class board {
 
 
     //function téléchargement cartes
-function downloadCards($pdo)
+function downloadCards($pdo){
+    
+}
 
     //function display jeu
 
