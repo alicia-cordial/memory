@@ -55,17 +55,17 @@ function sameLogin($login) {
 }
 
 
-/*
+
     // vérification bon password connexion
 
-function passwordConnect($login, $password) 
+function passwordConnect($login, $password) {
+
+$this->id = $user['id'];
+$this->login = $user['login'];
+$this->password = $user['password'];
 {
     $checkpassword = $this->pdo->Select('Select * from utilisateurs WHERE login = :login', ['login' => $login]);
     
-    $this->id = $user['id'];
-    $this->login = $user['login'];
-    $this->password = $user['password'];
-
     $auth = password_verify($_POST['password'], $user['password']);
 
     if ($auth == 1) {
@@ -76,7 +76,7 @@ function passwordConnect($login, $password)
     }
 }
 
-*/
+}
 
 
     // vérification passwords identiques
