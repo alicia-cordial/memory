@@ -60,15 +60,12 @@ function sameLogin($login) {
 
 function passwordConnect($login, $password) {
 
-$this->id = $user['id'];
-$this->login = $user['login'];
-$this->password = $user['password'];
 {
     $checkpassword = $this->pdo->Select('Select * from utilisateurs WHERE login = :login', ['login' => $login]);
     
-    $auth = password_verify($_POST['password'], $user['password']);
+   
 
-    if ($auth == 1) {
+    if ($checkpassword == 1) {
         return 1;
 
     } else {
