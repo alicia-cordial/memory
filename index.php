@@ -9,14 +9,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <title>Entree - Memory</title>
+    <title>Accueil - Le fil d'or</title>
 </head>
 
 <body>
 <div class="navbar-fixed">
     <nav class="nav-wrapper black">
         <div class="container">
-            <a href="#" class="brand-logo">Memory</a>
+            <a href="#" class="brand-logo">
+                Le fil d'or
+                <i class="material-icons right">flare</i>
+            </a>
             <a href="#" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
