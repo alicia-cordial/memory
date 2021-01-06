@@ -1,0 +1,20 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: url("../src/stars_background.gif");
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+
+a {
+    color: #ab47bc;
+}
+
+a:hover {
+    color: white;
+    transition: 0.5s;
+}
