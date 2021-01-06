@@ -1,81 +1,63 @@
 <?php
+require_once("database.php");
 
-class score {
-    private $id;
-    public $level;
-    public $time;
-    public $moves;
-    public $db;
+class score
+{
+    private $pdo;
+    private $id_utilisateur;
+
+    //CONNEXION BDD
+    function __construct($id)
+    {
+        $this->pdo = new database();
+        $this->id_utilisateur = $id;
+    }
 
     //INSERER SCORE
-
-    function insertScore($id, $level, $time, $moves){
-
-        $this->id = $id;
-        $this->level = $level;
-        $this->time = $time;
-        $this->moves = $moves;
-
-        $req_insert = $this->db->prepare("INSERT INTO score( id_utilisateur, niveau, nb_coup, time) VALUES (?, ?, ?, ?)") ;
-        $req_insert->execute([$this->id , $this->level , $this->moves , $this->time]);
-        
-         return true;
-         
-
-    }
-
-    //RECUPERER RESULTAT
-
- function fetchScore(){
-
-    $req_fetch = $this->db->prepare("SELECT * from score inner join utilisateurs on score.id_utilisateur =  utilisateurs.id");
-    $req_fetch->execute();
-    
-    $data = $req_fetch->fetchAll();
-
-    return true;
-    }   
-
-    //RECUPERER TOUS LES SCORES PAR NIVEAU
-
-
-function scorebyLevel($level){
-        
-    $req_level = $this->db->prepare("SELECT login, niveau, nb_coup, DATE_FORMAT(time, '%i:%s') AS time FROM score inner join utilisateurs on score.id_utilisateur =  utilisateurs.id WHERE niveau = ? ORDER BY score.nb_coup ASC LIMIT 10 ");
-    $req_level->execute([$level]);
-        
-    $data_level = $req_level->fetchAll();
-        
-    return $data_level;
-        
-
+    function insertScore($level, $time, $moves)
+    {
+        $insertscore = $this->pdo->Insert("INSERT INTO score (id_utilisateur, niveau, nb_coup, time) VALUES (:id, :level, :moves, :time)",
+            ['id' => $this->id_utilisateur, 'level' => $level, 'moves' => $moves, 'time' => $time]);
+        return 1;
     }
 
 
-
-    //RECUPERER TOUS LES SCORES PAR TEMPS
-
-public function scorebytime($level){
-        
-    $req_time = $this->db->prepare("SELECT login, niveau, nb_coup, DATE_FORMAT(time, '%i:%s') AS time FROM score inner join utilisateurs on score.id_utilisateur =  utilisateurs.id WHERE niveau = ? ORDER BY score.time ASC LIMIT 10 ");
-    $req_time->execute([$level]);
-    
-    $data_time =$req_time->fetchAll();
-
-        return $data_time ;
+    //RECUPERER LE TOP 10 PAR NB DE COUPS
+    function scoreByMoves($level)
+    {
+        $topMoves = $this->pdo->Select("SELECT * FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level ORDER BY score.nb_coup ASC LIMIT 10 ",
+            ['level' => $level]);
+        return $topMoves;
     }
 
-    
-    //RECUPERER LES SCORES PERSOS
+    //RECUPERER LE TOP 10 PAR TEMPS
+    public function scoreByTime($level)
+    {
+        $toptime = $this->pdo->Select("SELECT * FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level ORDER BY score.time ASC LIMIT 10 ",
+        ['level' => $level]);
+        return $toptime;
+    }
 
-    public function scoreUser($id){
 
-        $req_score= $this->db->prepare("SELECT * FROM score WHERE id_utilisateur = ? ORDER BY score.id DESC LIMIT 10");
-        $req_score->execute([$id]);
-        $data_user =  $req_score->fetchAll();
+    //RECUPERER LE MEILLEUR SCORE PERSO DE CHAQUE NIVEAU
 
-        return $data_user;
+    public function scoreUserByLevel($id)
+    {
+       $topperso = $this->pdo->Select("",
+       ['id' => $this->id_utilisateur]);
+        return $topperso;
+    }
+
+    //RECUPERER 5 DERNIERS SCORES PERSO
+    public function lastGames($id)
+    {
+        $lastgames = $this->pdo->Select("SELECT * FROM score WHERE id_utilisateur = :id ORDER BY score.id DESC LIMIT 10",
+        ['id' => $this->id_utilisateur]);
+        return $lastgames;
     }
 
 }
-?>
+
+
+$score = new score;
+//var_dump($score->insertScore(1, 2, 000000, 5));

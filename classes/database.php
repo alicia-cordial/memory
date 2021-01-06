@@ -41,7 +41,7 @@ class database
     {
         try {
             $this->Execute($statement, $parameters);
-            return $this->connection->lastInsertId();
+            return true;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
