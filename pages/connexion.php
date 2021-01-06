@@ -1,6 +1,7 @@
 <?php
 
 require_once '../classes/user.php';
+require_once '../classes/validator.php';
 
 session_start();
 $user = new user;
@@ -35,7 +36,7 @@ header("Location: profil.php?id=".$_SESSION['id']);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <title>Entree - Memory</title>
+    <title>Connexion</title>
 </head>
 
 <body>

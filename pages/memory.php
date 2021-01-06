@@ -1,20 +1,9 @@
 <?php
 
-require_once '../classes/user.php';
-
-require_once '../classes/validator.php';
-
-session_start();
-$user = new user; 
-
-if (isset($_POST['forminscription'])){
-
-   
-    $user->register($login, $password, $password2);
-    $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
- 
-}
 ?>
+
+
+
 
 <html lang="en">
 <head>
@@ -27,7 +16,7 @@ if (isset($_POST['forminscription'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <title>Inscription</title>
+    <title>Memory Game</title>
 </head>
 
 <body>
@@ -42,9 +31,9 @@ if (isset($_POST['forminscription'])){
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><a href="memory.php">Faire une partie</a></li>
-                <li><a href="inscription.php" class="btn white indigo-text">Inscription</a></li>
-                <li><a href="connexion.php" class="btn white indigo-text">Connexion</a></li>
+                <li><a href="pages/memory.php">Faire une partie</a></li>
+                <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
+                <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
             </ul>
         </div>
     </nav>
@@ -60,59 +49,13 @@ if (isset($_POST['forminscription'])){
     <li><a href="#">Contact
             <i class="material-icons">brightness_1</i>
         </a></li>
-    <li><a href="memory.php">Faire une partie
+    <li><a href="pages/memory.php">Faire une partie
             <i class="material-icons">brightness_5</i>
         </a></li>
-    <li><a href="inscription.php" class="btn white indigo-text">Inscription</a></li>
-    <li><a href="connexion.php" class="btn white indigo-text">Connexion</a></li>
+    <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
+    <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
 </ul>
 
-
-<main class="valign-wrapper">
-
-    
-        <!--FORMULAIRE--> 
-      
-
-<div class="row">
-  <form class="col s12" action="inscription.php" method="post">
-    <div class="row">
-        <div class="input-field col s12">
-          <input placeholder="login" id="login" type="text" name="login" class="validate" value="<?php if(isset($login)) { echo $login; } ?>"  maxlength="20" required/>
-          <label for="login">Login</label>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate" name="password"  maxlength="20" required/>
-          <label for="password">Password</label>
-        </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s12">
-          <input id="password2" type="password" class="validate" name="password2"  maxlength="20" required/>
-          <label for="password2">Confirmation Password</label>
-      </div>
-    </div>
-
-     
-  <button class="btn waves-effect waves-light black" type="submit" name="forminscription">Submit
-    <i class="material-icons right">send</i>
-  </button>
-        
-        <?php
-if (isset($erreur))
-{
-  echo $erreur;
-}
-?>
-    </form>
-</div>
-
-
-</main>
 
 
 <footer class="page-footer black center">
