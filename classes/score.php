@@ -59,5 +59,5 @@ class score
 }
 
 
-$score = new score;
+//$score = new score;
 //var_dump($score->insertScore(1, 2, 000000, 5));
