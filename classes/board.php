@@ -1,34 +1,13 @@
 <?php
 
 require_once('database.php');
+require_once('card.php');
 
 class board {
 
 
-    //function téléchargement cartes
-function downloadCards($pdo){
+//function construct
 
-}
-
-    //function display jeu
-
-
-
-    //function turncard
-
-
-    //function max paires
-
-
-    //function cartes visibles
-
-
-    //function vérification paires
-
-
-
-    //function jeu gagné
-   
 
 
     //function shuffle
@@ -52,6 +31,13 @@ function downloadCards($pdo){
         return $str;
     }
 
+
+//function displayBoard
+
+
+
+
+//function turnCard
 
 
 
