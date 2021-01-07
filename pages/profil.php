@@ -7,7 +7,7 @@ require_once '../classes/validator.php';
 
 session_start();
 
-
+$pdo = new database("localhost","memory", "root","");
 $user = new user;
 
 
@@ -15,9 +15,18 @@ if(isset($_SESSION['user'])){
 
   $user = $_SESSION['user'];
 
-
+var_dump($_SESSION['user']);
 
 if(isset($_POST['formprofil'])){
+  
+     $validator->userExists('login', $pdo, 'utilisateurs', 'Ce pseudo est déjà pris.');
+
+    $validator->passwordConfirm('password', 'Les mots de passe ne sont pas identique.');
+  
+    /*var_dump($validator);
+    var_dump($validator->isValid());*/
+
+
   $user->update($_POST['login'], $_POST['password'], $_POST['password2'], $user['id']);
 }
 

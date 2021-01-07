@@ -4,21 +4,25 @@ require_once '../classes/user.php';
 require_once '../classes/validator.php';
 
 session_start();
+$pdo = new database("localhost","memory", "root","");
 $user = new user;
+$validator = new validator;
 
 
 
 if (isset($_POST['formconnexion'])){
 
-  $login = (htmlspecialchars($_POST['login']));
-  
-  $password = sha1($_POST['password']); 
+  $login = $_POST['login'];
+  $password = $_POST['password']; 
   
 
-   $user->connect($_POST['login'], $_POST['password']);
+$user->connect($login, $password);
 $_SESSION['user'] = $user ;
 
-header("Location: profil.php?id=".$_SESSION['id']);
+var_dump($user);
+var_dump($validator);
+
+//header("Location: profil.php?id=".$_SESSION['id']);
 }
 
 ?>

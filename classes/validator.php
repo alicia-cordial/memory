@@ -4,18 +4,17 @@ require_once('database.php');
 require_once('user.php');
 
 
-class Validator{
+class validator{
     private $id;
     private $login;
     private $password;
     private $password2;
-
     private $pdo;
 
 
     //CONSTRUCTION
 
-    function __construct()
+    function __construct($pdo)
     {
         $this->pdo = new database();
     }
