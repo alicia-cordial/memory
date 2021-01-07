@@ -1,5 +1,5 @@
 <?php
-
+$titre = 'profil';
 require_once '../classes/user.php';
 require_once '../classes/validator.php';
 

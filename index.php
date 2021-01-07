@@ -17,19 +17,28 @@
     <nav>
         <div class="nav-wrapper black">
             <a href="#" class="brand-logo">
-                Le fil d'or
-                <i class="material-icons right">flare</i>
+                Le fil d'or<i class="material-icons right">flare</i>
             </a>
             <a href="#" class="sidenav-trigger" data-target="mobile-links">
                 <i class="material-icons">menu</i>
             </a>
             <ul class="right hide-on-med-and-down">
-                <li class="navlink"><a href="#">Home</a></li>
+                <li class="activepage"><a href="#">Home</a></li>
                 <li class="navlink"><a href="#">About</a></li>
                 <li class="navlink"><a href="#">Contact</a></li>
-                <li class="navlink"><a href="pages/memory.php">Faire une partie</a></li>
-                <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
-                <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
+                <li><a href="pages/walloffame.php" class="navlink">Wall of Fame</a></li>
+                <!-- Utilisateur déconnecté -->
+                <li class="navlink <?php if (!isset($_SESSION['user'])) {
+                    echo 'disabled';
+                } ?>"><a href="pages/level.php">Commencer une partie</a></li>
+                <?php if (!isset($_SESSION['user'])) : ?>
+                    <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
+                    <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
+                    <!-- Utilisateur connecté-->
+                <?php else : ?>
+                    <li><a href="pages/profil.php" class="btn white indigo-text">Profil</a></li>
+                    <li><a href="pages/déconnexion.php" class="btn white indigo-text">Déconnexion</a></li>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>
@@ -44,11 +53,19 @@
         <li><a href="#">Contact
                 <i class="material-icons">brightness_1</i>
             </a></li>
-        <li><a href="pages/memory.php">Faire une partie
-                <i class="material-icons">brightness_5</i>
-            </a></li>
-        <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
-        <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
+        <li><a href="pages/walloffame.php">Wall of Fame
+                <i class="material-icons">brightness_4</i>
+        </a></li>
+        <!-- Utilisateur déconnecté -->
+        <li class="navlink <?php if (!isset($_SESSION['user'])) {echo 'disabled';} ?>"><a href="pages/level.php">Commencer une partie<i class="material-icons">brightness_5</i></a></li>
+        <?php if (!isset($_SESSION['user'])) : ?>
+            <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
+            <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
+            <!-- Utilisateur connecté-->
+        <?php else : ?>
+            <li><a href="pages/profil.php" class="btn white indigo-text">Profil</a></li>
+            <li><a href="pages/déconnexion.php" class="btn white indigo-text">Déconnexion</a></li>
+        <?php endif; ?>
     </ul>
 </header>
 
@@ -74,11 +91,8 @@
             </div>
         </div>
     </div>
-
     <div class="footer-copyright center">
-        <div class="container">
-            © 2021 Sororité Copyright
-        </div>
+        <div class="container">© 2021 Sororité Copyright</div>
     </div>
 </footer>
 

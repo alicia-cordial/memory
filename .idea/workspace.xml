@@ -21,8 +21,17 @@
   <component name="ChangeListManager">
     <list default="true" id="2539edfb-f14f-46db-bbe8-63b4536a1ed4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/board.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/board.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/connexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/connexion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/inscription.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/inscription.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/level.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/level.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/memory.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/memory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profil.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profil.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/walloffame.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/walloffame.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

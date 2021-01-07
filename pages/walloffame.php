@@ -1,5 +1,5 @@
 <?php
-
+$titre = 'wall of fame';
 require_once '../classes/user.php';
 
 require_once '../classes/score.php';

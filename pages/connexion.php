@@ -1,5 +1,5 @@
 <?php
-
+$titre = "connexion";
 require_once '../classes/user.php';
 require_once '../classes/validator.php';
 
