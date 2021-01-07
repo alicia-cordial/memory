@@ -65,12 +65,24 @@ if ($_SESSION['firstcard']['id'] == $_SESSION['deck'][$_POST['carte']]['id']) {
         echo "<tr>";
         for($j= 0; $j < count($_SESSION['deck']); $j++) {
             echo "<td>";
+<<<<<<< Updated upstream
             if ($_SESSION['deck'][$j]['status'] == 'closed') {
                 echo "<form method='post'><button type='input' name='carte' class='cardbutton' value=".$j."><img class='imgcard responsive-image' src='../src/back.png'></button></form>";
             } elseif ($_SESSION['deck'][$j]['status'] == 'opened') {
                 echo "<img class='imgcard' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
             } elseif ($_SESSION['deck'][$j]['status'] == 'found') {
                 echo "<img class='imgcard' class='imgtrouvee' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
+=======
+            if(!isset($deck[$j]['status'])) {
+                $deck[$j]['status'] = 'closed';
+                }
+            if ($deck[$j]['status'] == 'closed') {
+                echo "<form method='post'><button type='input' name='carte' value=".$j."><img class='imgcard responsive-image' src='../src/back.png'></button></form>";
+            } elseif ($deck[$j]['status'] == 'opened') {
+                echo "<form method='post'><button type='input' class='disabled' name='carte' value=".$j."><img class='imgcard' src=" . $deck[$j]['img_url'] . "></button></form>";
+            } elseif ($deck[$j]['status'] == 'found') {
+                echo "<img class='imgcard' class='imgtrouvee' src=" . $deck[$j]['img_url'] . ">";
+>>>>>>> Stashed changes
             }
             echo "</td>";
             $i++;

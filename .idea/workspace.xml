@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2539edfb-f14f-46db-bbe8-63b4536a1ed4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/classes/board.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/board.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/footer.php" afterDir="false" />
@@ -29,6 +30,8 @@
       <change beforePath="$PROJECT_DIR$/pages/connexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/connexion.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/inscription.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/inscription.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/level.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/level.php" afterDir="false" />
+=======
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/pages/memory.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/memory.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profil.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profil.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/walloffame.php" beforeDir="false" afterPath="$PROJECT_DIR$/pages/walloffame.php" afterDir="false" />
@@ -73,7 +76,7 @@
       <workItem from="1609838371302" duration="20308000" />
       <workItem from="1609926657497" duration="3432000" />
       <workItem from="1609946232378" duration="9178000" />
-      <workItem from="1610014151658" duration="5651000" />
+      <workItem from="1610014151658" duration="6052000" />
     </task>
     <servers />
   </component>
