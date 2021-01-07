@@ -24,7 +24,7 @@ if (isset($_POST['forminscription'])){
     $user->register($login, $password);
     $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
     var_dump($user);
-    var_dump($validator);
+ 
 }
 ?>
 

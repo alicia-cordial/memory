@@ -21,11 +21,14 @@ class User{
 
  function register($login, $password){
 
+
+
     $register = $this->pdo->Insert('Insert into utilisateurs (login, password) values ( :login , :password )', [
             'login' => $login,
             'password' => $password,
         ]);
-
+       
+return $login;
     } 
 
 
@@ -34,11 +37,13 @@ class User{
 
 function connect($login, $password){
 
+    $this->login = $login;
+    $this->password = $password;
+
     $requser = $this->pdo->Select( 'Select * FROM utilisateurs WHERE login = :login AND password = :password ' , [
         'login' => $login,
         'password' => $password,
     ]);
-
 
 }
 

@@ -14,7 +14,7 @@ class validator{
 
     //CONSTRUCTION
 
-    function __construct($pdo)
+    function __construct()
     {
         $this->pdo = new database();
     }

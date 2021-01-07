@@ -4,6 +4,7 @@ require_once '../classes/user.php';
 require_once '../classes/validator.php';
 
 session_start();
+
 $pdo = new database("localhost","memory", "root","");
 $user = new user;
 $validator = new validator;
@@ -20,9 +21,9 @@ $user->connect($login, $password);
 $_SESSION['user'] = $user ;
 
 var_dump($user);
-var_dump($validator);
 
-//header("Location: profil.php?id=".$_SESSION['id']);
+
+header("Location: profil.php?id=".$_SESSION['id']);
 }
 
 ?>
