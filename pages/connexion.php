@@ -4,21 +4,27 @@ require_once '../classes/user.php';
 require_once '../classes/validator.php';
 
 session_start();
+
+$pdo = new database("localhost","memory", "root","");
 $user = new user;
+$validator = new validator;
 
 
 
 if (isset($_POST['formconnexion'])){
 
-  $login = (htmlspecialchars($_POST['login']));
-  
-  $password = sha1($_POST['password']); 
-  
+    $validator->passwordConnect('password', "Le mot de passe n'est pas correct.");
 
-   $user->connect($_POST['login'], $_POST['password']);
-$_SESSION['user'] = $user ;
+  $login = $_POST['login'];
+  $password = $_POST['password']; 
+  
+  $_SESSION['user'] = $user ;
 
-header("Location: profil.php?id=".$_SESSION['id']);
+$user->connect($login, $password);
+
+
+
+header("Location: profil.php");
 }
 
 ?>

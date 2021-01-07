@@ -18,6 +18,14 @@ class database
         }
     }
 
+    // DESTRUCTION
+
+    public function __destruct()
+    {
+        $this->connection = NULL;
+    }
+
+
     //Déconnexion
     public function disconnect()
     {
