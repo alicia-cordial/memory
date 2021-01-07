@@ -1,15 +1,22 @@
 <?php
 $titre = 'memory';
-require_once ('../classes/board.php');
+require_once('../classes/board.php');
 $game = new board();
 session_start();
 //$nbcards = $_SESSION['level'];
 $nbcards = 3;
 //session_destroy();
 
+
 if (!isset($_SESSION['nbcoups'])) {
     $_SESSION['nbcoups'] = 0;
 }
+
+if (!isset($_SESSION['foundpairs'])) {
+    $_SESSION['foundpairs'] = 0;
+}
+
+
 if (!isset($_SESSION['gamestarted'])) {
     $_SESSION['deck'] = $game->createGame($nbcards);
     $_SESSION['gamestarted'] = true;
@@ -18,41 +25,45 @@ if (!isset($_SESSION['gamestarted'])) {
 if (isset($_POST['carte'])) {
     $_SESSION['deck'][$_POST['carte']]['status'] = 'opened';
 
+
     if (!isset($_SESSION['firstcard'])) {
         $_SESSION['firstcard'] = $_SESSION['deck'][$_POST['carte']];
+        $_SESSION['firstcard']['idDeck'] = $_POST['carte'];
     } else {
         $_SESSION['secondcard'] = $_SESSION['deck'][$_POST['carte']];
+        $_SESSION['secondcard']['idDeck'] = $_POST['carte'];
+
     }
     $_SESSION['nbcoups']++;
 
+
     if (isset($_SESSION['secondcard'])) {
-        var_dump($_SESSION['secondcard']);
-        var_dump($_SESSION['firstcard']);
+        $id1 = $_SESSION['firstcard']['idDeck'];
+        $id2 = $_SESSION['secondcard']['idDeck'];
 
         if ($_SESSION['secondcard']['id'] == $_SESSION['firstcard']['id']) {
             echo 'yes';
-        } else {echo 'no';
-            $_SESSION['deck'][$_POST['carte']] = 'closed';
+            $_SESSION['deck'][$id1]['status'] = 'found';
+            $_SESSION['deck'][$id2]['status'] = 'found';
+            $_SESSION['foundpairs']++;
+        } else {
+            echo 'no';
+            $_SESSION['deck'][$id1]['status'] = 'closed';
+            $_SESSION['deck'][$id2]['status'] = 'closed';
         }
-        $_SESSION['firstcard'] = null;
-        $_SESSION['secondcard'] = null;
+        unset($_SESSION['firstcard']);
+        unset($_SESSION['secondcard']);
+
+    }
+  if ($_SESSION['foundpairs'] == $nbcards) {
+        echo 'vous avez gagné!';
+        session_destroy();
     }
 }
 
-/* if ($_SESSION['firstcard']['id'] == $_SESSION['deck'][$_POST['carte']]['id']) {
-
-           $_SESSION['deck'][$_POST['carte']]['status'] = 'found';
-           $_SESSION['deck']['firstcard']['status'] = 'opened';
-if ($_SESSION['firstcard']['id'] == $_SESSION['deck'][$_POST['carte']]['id']) {
-            echo 'yes';
-            $_SESSION['firstcard'] = null;
-        } else {
-            echo 'no';
-        }
-       }*/
 
 ?>
-
+<html lang="en">
 <?php include '../includes/header.php'; ?>
 
 <body>
@@ -63,26 +74,14 @@ if ($_SESSION['firstcard']['id'] == $_SESSION['deck'][$_POST['carte']]['id']) {
         $i = 1; //compteur cellules pour ligne
 
         echo "<tr>";
-        for($j= 0; $j < count($_SESSION['deck']); $j++) {
+        for ($j = 0; $j < count($_SESSION['deck']); $j++) {
             echo "<td>";
-<<<<<<< Updated upstream
             if ($_SESSION['deck'][$j]['status'] == 'closed') {
-                echo "<form method='post'><button type='input' name='carte' class='cardbutton' value=".$j."><img class='imgcard responsive-image' src='../src/back.png'></button></form>";
+                echo "<form method='post'><button type='input' name='carte' class='cardbutton' value=" . $j . "><img class='imgcard responsive-image' src='../src/back.png'></button></form>";
             } elseif ($_SESSION['deck'][$j]['status'] == 'opened') {
                 echo "<img class='imgcard' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
             } elseif ($_SESSION['deck'][$j]['status'] == 'found') {
-                echo "<img class='imgcard' class='imgtrouvee' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
-=======
-            if(!isset($deck[$j]['status'])) {
-                $deck[$j]['status'] = 'closed';
-                }
-            if ($deck[$j]['status'] == 'closed') {
-                echo "<form method='post'><button type='input' name='carte' value=".$j."><img class='imgcard responsive-image' src='../src/back.png'></button></form>";
-            } elseif ($deck[$j]['status'] == 'opened') {
-                echo "<form method='post'><button type='input' class='disabled' name='carte' value=".$j."><img class='imgcard' src=" . $deck[$j]['img_url'] . "></button></form>";
-            } elseif ($deck[$j]['status'] == 'found') {
-                echo "<img class='imgcard' class='imgtrouvee' src=" . $deck[$j]['img_url'] . ">";
->>>>>>> Stashed changes
+                echo "<img class='imgcard imgtrouvee' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
             }
             echo "</td>";
             $i++;
@@ -95,11 +94,12 @@ if ($_SESSION['firstcard']['id'] == $_SESSION['deck'][$_POST['carte']]['id']) {
 
 
         echo "</tr></table>";
-        echo $_SESSION['nbcoups'];
+        if (isset($_SESSION['nbcoups'])) {
+            echo $_SESSION['nbcoups'];
+        }
         ?>
     </div>
 </main>
-
 
 
 <?php include '../includes/footer.php'; ?>
