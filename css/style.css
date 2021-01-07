@@ -8,7 +8,7 @@ body {
     min-height: 100vh;
     width: 100%;
     flex-direction: column;
-    /*background: url("../src/stars_background.gif");*/
+    background-image: url("../src/stars_background.gif");
 }
 
 main {
@@ -46,4 +46,19 @@ table {
     width: 50%;
     border-collapse: collapse;
 
+}
+
+footer li {
+    padding-left: 20px;
+}
+
+.nav-wrapper {
+    padding: 0 20px 0 20px;
+}
+
+navlink {
+    transition: 0.5s;
+}
+.navlink:hover {
+    background-color: #ab47bc;
 }

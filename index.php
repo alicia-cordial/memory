@@ -13,9 +13,9 @@
 </head>
 
 <body>
-<div class="navbar-fixed">
-    <nav class="nav-wrapper black">
-        <div class="container">
+<header>
+    <nav>
+        <div class="nav-wrapper black">
             <a href="#" class="brand-logo">
                 Le fil d'or
                 <i class="material-icons right">flare</i>
@@ -24,34 +24,33 @@
                 <i class="material-icons">menu</i>
             </a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="pages/memory.php">Faire une partie</a></li>
+                <li class="navlink"><a href="#">Home</a></li>
+                <li class="navlink"><a href="#">About</a></li>
+                <li class="navlink"><a href="#">Contact</a></li>
+                <li class="navlink"><a href="pages/memory.php">Faire une partie</a></li>
                 <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
                 <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
             </ul>
         </div>
     </nav>
-</div>
 
-<ul class="sidenav" id="mobile-links">
-    <li><a href="#">Home
-            <i class="material-icons">brightness_3</i>
-        </a></li>
-    <li><a href="#">About
-            <i class="material-icons">brightness_2</i>
-        </a></li>
-    <li><a href="#">Contact
-            <i class="material-icons">brightness_1</i>
-        </a></li>
-    <li><a href="pages/memory.php">Faire une partie
-            <i class="material-icons">brightness_5</i>
-        </a></li>
-    <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
-    <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
-</ul>
-
+    <ul class="sidenav" id="mobile-links">
+        <li><a href="#">Home
+                <i class="material-icons">brightness_3</i>
+            </a></li>
+        <li><a href="#">About
+                <i class="material-icons">brightness_2</i>
+            </a></li>
+        <li><a href="#">Contact
+                <i class="material-icons">brightness_1</i>
+            </a></li>
+        <li><a href="pages/memory.php">Faire une partie
+                <i class="material-icons">brightness_5</i>
+            </a></li>
+        <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
+        <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
+    </ul>
+</header>
 
 <main>
 
@@ -66,17 +65,14 @@
             <div class="col l12 s6">
                 <ul class="valign-wrapper">
                     <li><a href="#" class="valign-wrapper">
-                            <span>Alicia</span>
-                            <img src="src/twitter.png" alt="twitter">
+                            <span>Alicia</span><img width="30" src="src/twitter.png" alt="twitter">
                         </a></li>
                     <li><a href="#" class="valign-wrapper">
-                            <span>May</span>
-                            <img src="src/twitter.png" alt="twitter">
+                            <span>May</span><img width="30" src="src/twitter.png" alt="twitter">
                         </a></li>
                 </ul>
             </div>
         </div>
-    </div>
     </div>
 
     <div class="footer-copyright center">
