@@ -13,17 +13,18 @@ $validator = new validator;
 
 if (isset($_POST['formconnexion'])){
 
+    $validator->passwordConnect('password', "Le mot de passe n'est pas correct.");
+
   $login = $_POST['login'];
   $password = $_POST['password']; 
   
+  $_SESSION['user'] = $user ;
 
 $user->connect($login, $password);
-$_SESSION['user'] = $user ;
-
-var_dump($user);
 
 
-header("Location: profil.php?id=".$_SESSION['id']);
+
+header("Location: profil.php");
 }
 
 ?>

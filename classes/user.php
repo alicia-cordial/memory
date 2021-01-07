@@ -37,6 +37,7 @@ return $login;
 
 function connect($login, $password){
 
+  
     $this->login = $login;
     $this->password = $password;
 
@@ -45,16 +46,22 @@ function connect($login, $password){
         'password' => $password,
     ]);
 
+    $this->id = $requser[0]['id'];
+  
+return $requser;
+
 }
 
 //UPDATE
 
-function update($login, $password)
+function update($login, $password, $id)
 {
-  
+
+
+
     $update = $this->pdo->Update("Update utilisateurs set login = :login, password = :password where id = $this->id ",[
         'login' => $login,
-        'password' => $password
+        'password' => $password,
     ]);
 
 
@@ -91,7 +98,6 @@ function disconnect(){
 
 
 }
-
 
 
 ?>

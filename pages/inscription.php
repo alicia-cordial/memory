@@ -9,6 +9,7 @@ $pdo = new database("localhost","memory", "root","");
 $user = new user; 
 
 
+
 if (isset($_POST['forminscription'])){
 
     $validator = new validator($_POST);
@@ -23,7 +24,7 @@ if (isset($_POST['forminscription'])){
    
     $user->register($login, $password);
     $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
-    var_dump($user);
+    
  
 }
 ?>

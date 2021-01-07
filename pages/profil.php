@@ -19,14 +19,22 @@ if(isset($_SESSION['user'])){
 
 if(isset($_POST['formprofil'])){
   
-     $validator->userExists('login', $pdo, 'utilisateurs', 'Ce pseudo est déjà pris.');
+  $validator = new validator($_POST);
 
-    $validator->passwordConfirm('password', 'Les mots de passe ne sont pas identique.');
+  $validator->sameLogin('login', $pdo, 'Ce pseudo est déjà pris.');
+
+  $validator->passwordConfirm('password', 'Les mots de passe ne sont pas identiques.');
+
+  $login = $_POST['login'];
+  $password = $_POST['password'];
+  $password2 = $_POST['password2'];
+ 
   
 
-  $user->update($_POST['login'], $_POST['password'], $_POST['password2'], $user['id']);
+  $user->update($login, $password, $user['id']);
+  var_dump($user);
 }
-var_dump($_GET);
+
 }
 
 ?>
