@@ -28,6 +28,9 @@ class score
         $topMoves = $this->pdo->Select("SELECT * FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level ORDER BY score.nb_coup ASC LIMIT 10 ",
             ['level' => $level]);
         return $topMoves;
+
+            //Sert pour la génération du tableau
+    $scoreGenerator = count($topMoves);   
     }
 
     //RECUPERER LE TOP 10 PAR TEMPS

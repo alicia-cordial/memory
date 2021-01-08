@@ -31,7 +31,7 @@ if(isset($_POST['formprofil'])){
  
   
 
-  $user->update($login, $password, $user['id']);
+  $user->update($login, $password);
   var_dump($user);
 }
 

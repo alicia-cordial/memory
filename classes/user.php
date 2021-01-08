@@ -54,7 +54,7 @@ return $requser;
 
 //UPDATE
 
-function update($login, $password, $id)
+function update($login, $password)
 {
 
 
