@@ -1,3 +1,4 @@
+/*Général*/
 html {
     width: 100%;
     height: 100%;
@@ -8,27 +9,140 @@ body {
     min-height: 100vh;
     width: 100%;
     flex-direction: column;
-    /*background-image: url("../src/stars_background.gif");*/
+    background-image: url("../src/stars_background.gif");
 }
 
 main {
     flex: 1 0 auto;
 }
 
+#mainIndex {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+table {
+    border-collapse: collapse;
+}
 
 a {
     color: #ab47bc;
 }
 
-a:hover {
-    color: white;
+/*Nav*/
+.nav-wrapper {
+    padding: 0 20px 0 20px;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.activepage {
+    background-color: #801A92;
+}
+
+.navlink {
     transition: 0.5s;
 }
+
+.navlink:hover {
+    background-color: #ab47bc;
+}
+
+/*Footer*/
+footer ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.5s;
+}
+
+footer li {
+    opacity: 0.7;
+}
+
+footer li:hover {
+    opacity: 1;
+}
+
+
+/*Accueil*/
+#mainIndex section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#sectionIndex {
+    flex-direction: row;
+}
+
+#sectionIndex2 {
+    flex-direction: column;
+}
+
+#mainIndex article {
+    width: 30%;
+    height: 100%;
+}
+
+.containertarotCard img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/*Animation cartes qui se tournent*/
+
+.containertarotCard {
+    perspective: 1000px;
+}
+
+.front, .back, .flipper {
+    width: 100%;
+    height: 100%;
+}
+
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.containertarotCard:hover .flipper {
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.front {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+
+/*Cartes Mémory*/
+
 .imgcard {
     max-width: 100px;
 }
 
-.imgtrouvee {
+.imgfound {
     opacity: 0.2;
 }
 
@@ -42,38 +156,23 @@ a:hover {
 .cardbutton:hover {
     border: 1px solid #ab47bc;
 }
-table {
-
-    border-collapse: collapse;
-
-}
-
-footer li {
-    padding-left: 20px;
-}
-
-.nav-wrapper {
-    padding: 0 20px 0 20px;
-}
-
-.navlink {
-    transition: 0.5s;
-}
-.navlink:hover {
-    background-color: #ab47bc;
-}
-
-.activepage {
-    background-color: #801A92;
-}
-.disabled {
-    pointer-events:none;
-    opacity: 0.7;
-}
 
 
+/*Level*/
 .buttonlevel {
     margin-bottom: 20px;
+    border: 1px solid white;
+    opacity: 0.5;
+    transition: 0.4s;
 }
 
-/*.buttonlevel:hover {}*/
+.buttonlevel:hover {
+    opacity: 1;
+}
+
+/*Responsive*/
+@media screen and (max-width: 640px) {
+    #mainIndex {
+        flex-direction: column;
+    }
+}

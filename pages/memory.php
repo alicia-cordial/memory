@@ -3,10 +3,9 @@ $titre = 'memory';
 require_once('../classes/board.php');
 $game = new board();
 session_start();
-//$nbcards = $_SESSION['level'];
-$nbcards = 3;
+$nbcards = $_SESSION['level'];
+//$nbcards = 3;
 //session_destroy();
-
 
 if (!isset($_SESSION['nbcoups'])) {
     $_SESSION['nbcoups'] = 0;
@@ -81,7 +80,7 @@ if (isset($_POST['carte'])) {
             } elseif ($_SESSION['deck'][$j]['status'] == 'opened') {
                 echo "<img class='imgcard' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
             } elseif ($_SESSION['deck'][$j]['status'] == 'found') {
-                echo "<img class='imgcard imgtrouvee' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
+                echo "<img class='imgcard imgfound' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
             }
             echo "</td>";
             $i++;

@@ -51,20 +51,20 @@
         <li><a href="../index.php">Contact
                 <i class="material-icons">brightness_1</i>
             </a></li>
-        <li><a href="pages/walloffame.php">Wall of Fame
+        <li><a href="walloffame.php">Wall of Fame
                 <i class="material-icons">brightness_4</i>
             </a></li>
         <!-- Utilisateur déconnecté -->
         <li class="navlink <?php if (!isset($_SESSION['user'])) {
             echo 'disabled';
-        } ?>"><a href="pages/level.php">Commencer une partie<i class="material-icons">brightness_5</i></a></li>
+        } ?>"><a href="level.php">Commencer une partie<i class="material-icons">brightness_5</i></a></li>
         <?php if (!isset($_SESSION['user'])) : ?>
-            <li><a href="pages/inscription.php" class="btn white indigo-text">Inscription</a></li>
-            <li><a href="pages/connexion.php" class="btn white indigo-text">Connexion</a></li>
+            <li><a href="inscription.php" class="btn white indigo-text">Inscription</a></li>
+            <li><a href="connexion.php" class="btn white indigo-text">Connexion</a></li>
             <!-- Utilisateur connecté-->
         <?php else : ?>
-            <li><a href="pages/profil.php" class="btn white indigo-text">Profil</a></li>
-            <li><a href="pages/déconnexion.php" class="btn white indigo-text">Déconnexion</a></li>
+            <li><a href="profil.php" class="btn white indigo-text">Profil</a></li>
+            <li><a href="déconnexion.php" class="btn white indigo-text">Déconnexion</a></li>
         <?php endif; ?>
     </ul>
 </header>
