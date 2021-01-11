@@ -3,6 +3,8 @@ $titre = 'profil';
 require_once '../classes/user.php';
 require_once '../classes/validator.php';
 require_once '../classes/database.php';
+require_once '../classes/score.php';
+
 
 
 session_start();
@@ -10,6 +12,7 @@ session_start();
 $pdo = new database("localhost","memory", "root","");
 $user = new user;
 
+$score_user= new score;
 
 if(isset($_SESSION['user'])){
 

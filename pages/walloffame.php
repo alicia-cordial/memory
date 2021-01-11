@@ -10,9 +10,9 @@ session_start();
 
 
 $pdo = new database("localhost","memory2", "root","");
-$db_connect = $pdo->__construct();
 
-$score = new score($db_connect);
+
+$score = new score;
 $data = $score->scorebyLevel('3 paires');
 
 if(isset($_POST['valider'])){
@@ -32,6 +32,8 @@ if(isset($_POST['valider'])){
 
     }
 }
+
+
 ?>
 
 <?php include '../includes/header.php'; ?>
