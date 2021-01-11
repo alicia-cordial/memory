@@ -6,13 +6,13 @@ class score
     private $pdo;
     private $id_utilisateur;
 
-    //CONNEXION BDD
+  /*  //CONNEXION BDD
     function __construct($id)
     {
         $this->pdo = new database();
-        $this->id_utilisateur = $id;
+        //$this->id_utilisateur = $id;
     }
-
+*/
     //INSERER SCORE
     function insertScore($level, $time, $moves)
     {
@@ -57,7 +57,7 @@ return $req_level;
 
     public function scoreUserByLevel($id)
     {
-       $topperso = $this->pdo->Select("",
+       $topperso = $this->pdo->Select("SELECT * FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level ORDER BY score.nb_coup ASC LIMIT 10",
        ['id' => $this->id_utilisateur]);
         return $topperso;
     }
