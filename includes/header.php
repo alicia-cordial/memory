@@ -35,7 +35,7 @@
                     <!-- Utilisateur connecté-->
                 <?php else : ?>
                     <li><a href="profil.php" class="btn white indigo-text">Profil</a></li>
-                    <li><a href="déconnexion.php" class="btn white indigo-text">Déconnexion</a></li>
+                    <li><a href="deconnexion.php" class="btn white indigo-text">Déconnexion</a></li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -64,7 +64,7 @@
             <!-- Utilisateur connecté-->
         <?php else : ?>
             <li><a href="profil.php" class="btn white indigo-text">Profil</a></li>
-            <li><a href="déconnexion.php" class="btn white indigo-text">Déconnexion</a></li>
+            <li><a href="deconnexion.php" class="btn white indigo-text">Déconnexion</a></li>
         <?php endif; ?>
     </ul>
 </header>
