@@ -14,13 +14,15 @@ if (isset($_POST['forminscription'])){
 
     $validator = new validator($_POST);
 
-    $validator->userExists('login', $pdo, 'Ce pseudo est déjà pris.');
-
-    $validator->passwordConfirm('password', 'Les mots de passe ne sont pas identiques.');
-
     $login = $_POST['login'];
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
+
+    $validator->userExists($login);
+
+    $validator->passwordConfirm($password, $password2);
+
+
    
     $user->register($login, $password);
     $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";

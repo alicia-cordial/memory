@@ -26,9 +26,9 @@ if(isset($_POST['formprofil'])){
   
   $validator = new validator($_POST);
 
-  $validator->sameLogin('login', $pdo, 'Ce pseudo est déjà pris.');
+  $validator->sameLogin($login);
 
-  $validator->passwordConfirm('password', 'Les mots de passe ne sont pas identiques.');
+  $validator->passwordConfirm($login, $password);
 
   $login = $_POST['login'];
   $password = $_POST['password'];

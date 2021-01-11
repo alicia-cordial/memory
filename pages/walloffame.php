@@ -13,25 +13,6 @@ $pdo = new database("localhost","memory2", "root","");
 
 
 $score = new score;
-$data = $score->scorebyLevel('3 paires');
-
-if(isset($_POST['valider'])){
-
-    if(isset($_POST['filtre']) && $_POST['filtre'] == 'nb_coup'){
-
-        $level= strval($_POST['level']); 
-        $data = $score->scoreByMoves($level);
-
-    }
-
-    if(isset($_POST['filtre']) && $_POST['filtre'] == 'time'){
-
-        $level= strval($_POST['level']); 
-        $data = $score->scoreByTime($level);
-        
-
-    }
-}
 
 
 ?>
@@ -91,15 +72,13 @@ if(isset($_POST['valider'])){
         </thead>
        
         <tbody>
-        <?php for($i=0; $i<count($data); $i++): ?>
+ 
     
             <tr>
-                <td><?= $data[$i]['login'] ?></td>
-                <td><?= $data[$i]['niveau'] ?></td>
-                <td><?= $data[$i]['time'] ?></td>
+             
                 
             </tr>
-        <?php endfor?>
+
 
         </tbody>
         
@@ -117,15 +96,13 @@ if(isset($_POST['valider'])){
         </thead>
        
         <tbody>
-        <?php for($i=0; $i<count($data); $i++): ?>
+       
     
             <tr>
-                <td><?= $data[$i]['login'] ?></td>
-                <td><?= $data[$i]['niveau'] ?></td>
-                <td><?= $data[$i]['nb_coup'] ?></td>
+            
                 
             </tr>
-        <?php endfor?>
+
 
         </tbody>
         

@@ -13,10 +13,12 @@ $validator = new validator;
 
 if (isset($_POST['formconnexion'])){
 
-    $validator->passwordConnect('password', "Le mot de passe n'est pas correct.");
-
   $login = $_POST['login'];
   $password = $_POST['password']; 
+
+    $validator->passwordConnect($login, $password);
+
+
   
   $_SESSION['user'] = $user ;
 
