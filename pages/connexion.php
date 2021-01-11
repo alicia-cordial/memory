@@ -7,26 +7,30 @@ session_start();
 
 $pdo = new database("localhost","memory", "root","");
 $user = new user;
-$validator = new validator;
 
 
 
 if (isset($_POST['formconnexion'])){
 
-  $_SESSION['user'] = $user ;
+  $validator = new validator;
 
-
-  $_POST['login'] = htmlspecialchars($login);
-  $_POST['password'] = $password ; 
+  $login= htmlspecialchars($_POST['login']);
+  $password = $_POST['password']; 
   
 
-    if($validator->passwordConnect($login, $password)){
-      
+    if($validator->passwordConnect($login, $password) == 0){
+      $errors[] = "Ce login ou mot de passe n'existe pas.";
+    }
+
+    if (empty($errors)) {
       $user->connect($login, $password);  
-  
+      $_SESSION['user'] = $user ;
+
+      header("Location: profil.php");
+    
   }
 
-    header("Location: profil.php");
+
   
 }
 
@@ -39,6 +43,22 @@ if (isset($_POST['formconnexion'])){
 
 <main class="valign-wrapper">
    <div class="row">
+
+   <?php if (!empty($errors)): ?>
+            <div>
+                <?php foreach ($errors as $error) {
+                    echo '<p class="red-text">' . $error . '</p>';
+                } ?>
+            </div>
+        <?php elseif (isset($success)): ?>
+            <div>
+                <?php {
+                    echo '<p class="green-text">' . $success . '</p>';
+                } ?>
+            </div>
+        <?php endif; ?>
+
+
     <form class="col s12" action="connexion.php" method="post">
       <div class="row">
         <div class="input-field col s12">
