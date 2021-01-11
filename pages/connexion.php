@@ -15,22 +15,18 @@ if (isset($_POST['formconnexion'])){
 
   $_SESSION['user'] = $user ;
 
+
+  $_POST['login'] = htmlspecialchars($login);
+  $_POST['password'] = $password ; 
   
-  $login = $_POST['login'];
-  $password = $_POST['password']; 
 
     if($validator->passwordConnect($login, $password)){
-
-    $user->connect($login, $password);
-
-   
-    
-    header("Location: profil.php");
-
-
+      
+      $user->connect($login, $password);  
+  
   }
 
-
+    header("Location: profil.php");
   
 }
 

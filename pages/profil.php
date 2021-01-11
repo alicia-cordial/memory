@@ -1,5 +1,5 @@
 <?php
-$titre = 'profil';
+
 
 
 require_once '../classes/user.php';
@@ -7,7 +7,7 @@ require_once '../classes/validator.php';
 require_once '../classes/database.php';
 require_once '../classes/score.php';
 
-
+$titre = 'profil';
 
 session_start();
 
@@ -15,26 +15,28 @@ $pdo = new database("localhost","memory", "root","");
 $user = new user;
 
 $score_user= new score;
+$validator = new validator;
+
+
 
 if(isset($_SESSION['user'])){
 
   $user = $_SESSION['user'];
 
 
-
-if(isset($_POST['formprofil'])){
+  if(isset($_POST['formprofil'])){
   
-  $validator = new validator($_POST);
 
-  $validator->sameLogin($login);
-
-  $validator->passwordConfirm($login, $password);
-
-  $login = $_POST['login'];
+   $_POST['login'] = htmlspecialchars($login);
   $password = $_POST['password'];
   $password2 = $_POST['password2'];
  
-  
+
+  if($validator->sameLogin($login)){
+
+    $validator->passwordConfirm($login, $password);
+  }
+
 
   $user->update($login, $password);
   var_dump($user);
