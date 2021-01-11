@@ -19,6 +19,12 @@ class validator{
         $this->pdo = new database();
     }
 
+  // DESTRUCTION
+
+  public function __destruct()
+  {
+      $this->pdo = NULL;
+  }
 
     // vérification login existant
 

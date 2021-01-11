@@ -1,20 +1,16 @@
 <?php
 
-
-
 require_once '../classes/user.php';
 require_once '../classes/validator.php';
-require_once '../classes/database.php';
 require_once '../classes/score.php';
 
-$titre = 'profil';
+
 
 session_start();
 
-$pdo = new database("localhost","memory", "root","");
-$user = new user;
+$titre = 'profil';
 
-$score_user= new score;
+$user = new user;
 
 
 
@@ -47,17 +43,17 @@ if(isset($_SESSION['user'])){
   $user->update($login, $password);
   $success = "Votre compte a bien été modifié.  <a href='level.php'>Commencer une partie</a>";
 }
-
+var_dump($user->update($login, $password));
 }
 
+
 }
-
-
 
 ?>
 
 
-<?php include '../includes/header.php'; ?>
+
+<?php //include '../includes/header.php'; ?>
 
 <main class="valign-wrapper"> 
     
@@ -75,7 +71,7 @@ if(isset($_SESSION['user'])){
                     echo '<p class="green-text">' . $success . '</p>';
                 } ?>
             </div>
-        <?php endif; ?>
+  <?php endif; ?>
 
 
   <form class="col s12" action="profil.php" method="post" enctype="multipart/form-data">
