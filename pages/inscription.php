@@ -9,7 +9,6 @@ $user = new user;
 if (isset($_POST['forminscription'])) {
 
     $validator = new validator();
-
     $login = htmlspecialchars($_POST['login']);
     $password = htmlspecialchars($_POST['password']);
     $password2 = htmlspecialchars($_POST['password2']);
@@ -20,7 +19,9 @@ if (isset($_POST['forminscription'])) {
     if ($validator->passwordConfirm($password, $password2) == 0) {
         $errors[] = "Les deux mots de passe ne sont pas identiques.";
     }
-
+    if ($validator->passwordStrenght($password) == 0) {
+        $errors[] = "Le mot de passe doit comporter au moins un chiffre.";
+    }
     if (empty($errors)) {
         $user->register($login, $password);
         $success = "Votre compte a bien été créé. <a href='connexion.php'>Me connecter</a>";
@@ -33,10 +34,10 @@ if (isset($_POST['forminscription'])) {
 <?php include '../includes/header.php'; ?>
 
 <main class="valign-wrapper">
+
     <!--FORMULAIRE-->
-
     <div class="row">
-
+        <h3 class="center">INSCRIPTION</h3>
         <?php if (!empty($errors)): ?>
             <div>
                 <?php foreach ($errors as $error) {
@@ -50,6 +51,7 @@ if (isset($_POST['forminscription'])) {
                 } ?>
             </div>
         <?php endif; ?>
+
         <form class="col s12" action="inscription.php" method="post">
             <div class="row">
                 <div class="input-field col s12">
@@ -65,6 +67,7 @@ if (isset($_POST['forminscription'])) {
                 <div class="input-field col s12">
                     <input id="password" type="password" class="validate" name="password" maxlength="20" required/>
                     <label for="password">Password</label>
+                    <span class="helper-text">Le mot de passe doit comporter au moins un chiffre.</span>
                 </div>
             </div>
 
@@ -75,16 +78,14 @@ if (isset($_POST['forminscription'])) {
                 </div>
             </div>
 
-
             <button class="btn waves-effect waves-light black" type="submit" name="forminscription">Submit
                 <i class="material-icons right">send</i>
             </button>
         </form>
+
     </div>
 
-
 </main>
-
 
 <?php include '../includes/footer.php'; ?>
 

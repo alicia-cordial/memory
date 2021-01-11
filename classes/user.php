@@ -21,8 +21,6 @@ class User{
 
  function register($login, $password){
 
-
-
     $register = $this->pdo->Insert('Insert into utilisateurs (login, password) values ( :login , :password )', [
             'login' => $login,
             'password' => password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]),
