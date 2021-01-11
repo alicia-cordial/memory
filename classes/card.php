@@ -3,16 +3,17 @@
 class card
 {
     private $status;
-    private $card_value;
     private $id;
+    private $placeInDeck;
 
 
     //CONSTRUCTEUR
-    function __construct($status, $value, $id)
+    function __construct ($place, $id, $url)
     {
-        $this->status = $status;
-        $this->card_value = $value;
+        $this->placeInDeck = $place;
         $this->id = $id;
+        $this->status = "closed";
+        $this->url = $url;
     }
 
     //SET STATUS CARTE
@@ -28,16 +29,20 @@ class card
         return $this->status;
     }
 
-    //GET VALUE
-    function getValue()
-    {
-        return $this->card_value;
+    function getPlace() {
+        return $this->placeInDeck;
     }
+
 
     //GET ID
     function getId()
     {
         return $this->id;
+    }
+
+    function getUrl()
+    {
+        return $this->url;
     }
 
     //TOURNER LA CARTE
@@ -53,13 +58,16 @@ class card
     // DISPLAY CARTES
     function displayCards()
     {
-        if ($this->status == "closed") {
+       /* if ($this->status == "closed") {
             echo "<div><a href= 'memory.php?id=$this->id\'><img src ='src/back.png' alt='carte_retourné' class='covered'></a></div>";
         } elseif ($this->status == "opened") {
             echo "<div><img src='src/img$this->card_value.png' alt='carte_decouverte'></div>";
         } elseif ($this->status == "found") {
             echo "<div><img src='src/img$this->card_value.png' alt='carte_trouvee'></div>";
-        }
+        }*/
     }
+
 }
+
+
 

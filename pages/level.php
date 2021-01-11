@@ -4,6 +4,9 @@ session_start();
 /*if (!isset($_SESSION['user'])) {
     header("location: connexion.php");
 }*/
+/*if (isset($_SESSION['level'])) {
+    header('location:memory.php');
+}*/
 $pairsmin = 3; // min niveau
 $pairsmax = 12; // max niveau
 
@@ -20,8 +23,7 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <h1 class="white-text"><em>Nombres de paires</em></h1>
         <form action="level.php" method="post" class="row">
-            <?php
-            for ($i = $pairsmin; $i <= $pairsmax; $i++) {
+            <?php for ($i = $pairsmin; $i <= $pairsmax; $i++) {
                 echo
                     "<div class='col'>
                     <button class='black white-text btn-large buttonlevel' type='submit' name='submit' value='" . $i . "'>" . $i . "</button>

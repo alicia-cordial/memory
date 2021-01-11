@@ -1,65 +1,53 @@
 <?php
-$titre = 'memory';
+$titre = 'Memory';
 require_once('../classes/board.php');
-$game = new board();
 session_start();
 $nbcards = $_SESSION['level'];
-//$nbcards = 3;
 //session_destroy();
+//$nbcards = 3;
+//var_dump($_SESSION);
 
-if (!isset($_SESSION['nbcoups'])) {
-    $_SESSION['nbcoups'] = 0;
-}
-
-if (!isset($_SESSION['foundpairs'])) {
-    $_SESSION['foundpairs'] = 0;
-}
-
-
+//Initialisation partie
 if (!isset($_SESSION['gamestarted'])) {
-    $_SESSION['deck'] = $game->createGame($nbcards);
+    $_SESSION['game'] = new board();
+    $_SESSION['deck'] = $_SESSION['game']->createGame($nbcards); //génère jeu de cartes
     $_SESSION['gamestarted'] = true;
 }
 
+//Partie en cours
 if (isset($_POST['carte'])) {
-    $_SESSION['deck'][$_POST['carte']]['status'] = 'opened';
+    $_SESSION['game']->addCoup(); //compte un coups
 
+    $selectCard = $_POST['carte'];
+    $_SESSION['deck'][$selectCard]->setStatus('open'); //retourne la carte
 
-    if (!isset($_SESSION['firstcard'])) {
-        $_SESSION['firstcard'] = $_SESSION['deck'][$_POST['carte']];
-        $_SESSION['firstcard']['idDeck'] = $_POST['carte'];
+    if (!isset($_SESSION['card1'])) { //stocke valeur premiere carte
+        $_SESSION['card1'] = $selectCard;
+    } elseif (!isset($_SESSION['card2'])) { //stocke valeur seconde carte
+        $_SESSION['card2'] = $selectCard;
     } else {
-        $_SESSION['secondcard'] = $_SESSION['deck'][$_POST['carte']];
-        $_SESSION['secondcard']['idDeck'] = $_POST['carte'];
-
-    }
-    $_SESSION['nbcoups']++;
-
-
-    if (isset($_SESSION['secondcard'])) {
-        $id1 = $_SESSION['firstcard']['idDeck'];
-        $id2 = $_SESSION['secondcard']['idDeck'];
-
-        if ($_SESSION['secondcard']['id'] == $_SESSION['firstcard']['id']) {
-            echo 'yes';
-            $_SESSION['deck'][$id1]['status'] = 'found';
-            $_SESSION['deck'][$id2]['status'] = 'found';
-            $_SESSION['foundpairs']++;
+        //Si bonne paire, grise la carte
+        if ($_SESSION['deck'][$_SESSION['card1']]->getId() === $_SESSION['deck'][$_SESSION['card2']]->getId()) {
+            $_SESSION['deck'][$_SESSION['card1']]->setStatus('found');
+            $_SESSION['deck'][$_SESSION['card2']]->setStatus('found');
+            $_SESSION['game']->AddPairsFound();
+            //Si mauvaise paire, face cachée
         } else {
-            echo 'no';
-            $_SESSION['deck'][$id1]['status'] = 'closed';
-            $_SESSION['deck'][$id2]['status'] = 'closed';
-        }
-        unset($_SESSION['firstcard']);
-        unset($_SESSION['secondcard']);
-
+            $_SESSION['deck'][$_SESSION['card1']]->setStatus('closed');
+            $_SESSION['deck'][$_SESSION['card2']]->setStatus('closed');
+        } //réinitialise valeurs cartes 1 et 2
+        unset($_SESSION['card1']);
+        unset($_SESSION['card2']);
+        $_SESSION['card1'] = $selectCard; //stocke valeur carte actuelle
     }
-  if ($_SESSION['foundpairs'] == $nbcards) {
-        echo 'vous avez gagné!';
-        session_destroy();
+
+    //Fin de partie
+    if (($_SESSION['game']->getPairsFound() == $nbcards) and (isset($_SESSION['card1'])) and (isset($_SESSION['card2']))) {
+        $_SESSION['deck'][$_SESSION['card1']]->setStatus('found');
+        $_SESSION['deck'][$_POST['carte']]->setStatus('found');
+        $success = "Vous avez gagné !";
     }
 }
-
 
 ?>
 <html lang="en">
@@ -68,38 +56,42 @@ if (isset($_POST['carte'])) {
 <body>
 <main>
     <div class="container">
-        <?php
-        echo "<table>";
-        $i = 1; //compteur cellules pour ligne
+        <div>
+                <p>Nombre de coups : <?php echo $_SESSION['game']->getCoups(); ?></p>
+            <?php if (isset($success)): ?>
+                <p><?php echo $success;?></p>
+            <a href="restart.php">Refaire une partie</a>
+            <?php endif; ?>
+        </div>
 
+        <table>
+        <?php
+        $i = 1;
         echo "<tr>";
-        for ($j = 0; $j < count($_SESSION['deck']); $j++) {
+
+        foreach ($_SESSION['deck'] as $card) { //génération cartes dans les cellules
             echo "<td>";
-            if ($_SESSION['deck'][$j]['status'] == 'closed') {
-                echo "<form method='post'><button type='input' name='carte' class='cardbutton' value=" . $j . "><img class='imgcard responsive-image' src='../src/back.png'></button></form>";
-            } elseif ($_SESSION['deck'][$j]['status'] == 'opened') {
-                echo "<img class='imgcard' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
-            } elseif ($_SESSION['deck'][$j]['status'] == 'found') {
-                echo "<img class='imgcard imgfound' src=" . $_SESSION['deck'][$j]['img_url'] . ">";
+            if ($card->getStatus() == 'closed') {
+                echo "<form method='post' action='memory.php'><button type='input' name='carte' class='cardbutton' value=" . $card->getPlace() . "><img class='imgcard responsive-image' src='../src/back.png'></button></form>";
+            } elseif ($card->getStatus() == 'open') {
+                echo "<img class='imgcard' src=" . $card->getUrl() . ">";
+            } elseif ($card->getStatus() == 'found') {
+                echo "<img class='imgcard imgfound' src=" .$card->getUrl() . ">";
             }
             echo "</td>";
             $i++;
 
-            if ($i > 5) {
+            if ($i > 5) { // génération row de 5 cartes
                 echo "</tr><tr>";
                 $i = 1;
             }
         }
 
-
-        echo "</tr></table>";
-        if (isset($_SESSION['nbcoups'])) {
-            echo $_SESSION['nbcoups'];
-        }
+        echo "</tr>";
         ?>
+        </table>
     </div>
 </main>
-
 
 <?php include '../includes/footer.php'; ?>
 
