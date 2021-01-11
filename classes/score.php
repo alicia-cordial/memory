@@ -42,6 +42,17 @@ class score
     }
 
 
+//SCORE PAR NIVEAU
+public function scorebyLevel($level){
+        
+
+$req_level = $this->pdo->Select("SELECT login, niveau, nb_coup, DATE_FORMAT(time, '%i:%s') AS time FROM score inner join utilisateurs  on score.id_utilisateur =  utilisateurs.id WHERE niveau = :niveau ORDER BY score.nb_coup ASC LIMIT 10 ");
+
+return $req_level;
+
+
+}
+
     //RECUPERER LE MEILLEUR SCORE PERSO DE CHAQUE NIVEAU
 
     public function scoreUserByLevel($id)
