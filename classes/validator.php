@@ -23,19 +23,13 @@ class validator{
     // vérification login existant
 
 function userExists($login) 
-{  
-    
+{
     $check = $this->pdo->Select('Select * FROM utilisateurs WHERE login = :login', ['login' => $login]);
-
-
-    if ($check == 1) {
-
-        return true;
-
+    if (!empty($check)) {
+        return 1;
     } else {
-        return false;
+        return 0;
     }
-
 }
 
 
