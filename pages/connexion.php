@@ -13,20 +13,25 @@ $validator = new validator;
 
 if (isset($_POST['formconnexion'])){
 
+  $_SESSION['user'] = $user ;
+
+  
   $login = $_POST['login'];
   $password = $_POST['password']; 
 
-    $validator->passwordConnect($login, $password);
+    if($validator->passwordConnect($login, $password)){
+
+    $user->connect($login, $password);
+
+   
+    
+    header("Location: profil.php");
+
+
+  }
 
 
   
-  $_SESSION['user'] = $user ;
-
-$user->connect($login, $password);
-
-
-
-header("Location: profil.php");
 }
 
 ?>
