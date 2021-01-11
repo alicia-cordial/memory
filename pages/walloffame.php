@@ -1,9 +1,6 @@
 <?php
 
-
-require_once '../classes/user.php';
-
-
+require_once '../classes/database.php';
 require_once '../classes/score.php';
 
 
@@ -11,19 +8,30 @@ $titre = 'wall of fame';
 
 session_start();
 
-//$score = new score ;
 
-     //RECUPERER LE TOP 10 PAR NB DE COUPS ->top-gen OK!!!!!!
-     //RECUPERER LE TOP 10 PAR TEMPS???????
-     //nb score pour généralisation tableau
-     // $top_10 TOUT CONFONDU
-     //^nb_paire NB DE PAIRE
-     //top_paire INFOS TOP 10
-     //nb_score = count($top_gen); IMPORTANT A METTRE DANS CLASS SCORE
-     // $nb_top_10 = count($top_10); IMPORTANT A METTRE DANS CLASS SCORE
+$pdo = new database("localhost","memory2", "root","");
+$db_connect = $pdo->__construct();
 
+$score = new score($db_connect);
+$data = $score->scorebyLevel('3 paires');
 
+if(isset($_POST['valider'])){
 
+    if(isset($_POST['filtre']) && $_POST['filtre'] == 'nb_coup'){
+
+        $level= strval($_POST['level']); 
+        $data = $score->scoreByMoves($level);
+
+    }
+
+    if(isset($_POST['filtre']) && $_POST['filtre'] == 'time'){
+
+        $level= strval($_POST['level']); 
+        $data = $score->scoreByTime($level);
+        
+
+    }
+}
 ?>
 
 <?php include '../includes/header.php'; ?>
@@ -31,148 +39,99 @@ session_start();
 
 <main id="main_fame">  
 
-<h2 class="mt-3">Wall of Fame</h2>
+
+<form action="" method="post" class="filter" >
+
+<div class="filterby" >
+    <p>Choisir le niveau</p>
+
+    <select name="level">
+
+        <?php for($i=3; $i<=12; ++$i):?>
+            <option value="<?= $i?> paires" ><?= $i ?> paires </option>
+        <?php endfor ?>
+
+    </select>
 
 
-        <!--TOP GENERAL -->
+</div>
 
-<section id="top_gen">
-
-    <table class="table table-dark top">
-
-        <thead class="thead-dark">
-            <tr>
-                <th colspan="3">TOP 10 Joueurs</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr class="titre_top">
-                <td>Place</td>
-                <td>Nom</td>
-                <td>Score</td>
-            </tr>
-            <?php for($i=0; $i<$scoreGenerator; $i++) { ?>
-            <tr>
-                <td class="place"># <?= ($i+1)?></td>
-                <td><?=$topMoves[$i]['username']?></td>
-                <td class="score"><?=$topMoves[$i]['score_total']?></td>                                                    
-                        
-                <?php } ?>
-        </tbody>
-
-    </table>
-
-    <!--PLUS D'INFOS TOP 10-->
-
-    <table class="table table-dark top">
-
-        <thead class="thead-dark">
-            <tr>
-                <th colspan="6">TOP 10 : C'est super</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr class="titre_top">
-                <td>Place</td>
-                <td>Nom</td>
-                <td>Score</td>
-                <td>Nombre de paires</td>
-                <td>Temps</td>
-                <td>Nombre de coups</td>
-            </tr>
-            <?php for($i=0; $i<$nb_top_10; $i++) { ?>
-
-            <tr>
-                <td class="place"># <?= ($i+1)?></td>                     
-                <td><?= $top_10[$i]["username"] ?></td>
-                <td class="score"><?= $top_10[$i]["score"] ?></td>   
-                <td><?= $top_10[$i]["nb_paires"] ?></td>                                                 
-                <td><?= number_format($top_10[$i]["temps"], 3) ?></td>
-                <td><?= $top_10[$i]["nb_coups"] ?></td>
-                     
-                <?php } ?>
-
-        </tbody>
-
-    </table>
-
-</section>
-
-
-<!--TOP CHAQUE NIVEAU-->
-<section id="top_paires">
+<div class="filterby">
+    <p>Trier par :</p>
+    <div>
+    <input type="radio" name='filtre' value='time' id='time'>
+    <label for='time'>Meilleur temps</label>
+    </div>
     
-    <section>
-            
-        <form action="fame.php#top_paires" method="POST" id="form_top_paire">
-            
-            <select name="top_paire" id="select_top_paire">
-            
-                <?php for($i=3; $i<=$nb_paire["nb_paire"] AND $i<=12 ; $i++) { ?>
-                            
-                    <option value="<?= $i ?>"
-                    
-                    <?php if(isset($_POST["top_paire"]) && $i == $_POST["top_paire"]) { ?>
-                    
-                     selected
-                    
-                    <?php } ?> ><?= $i ?> paires</option>
-                
-                    <?php } ?>
+    <div>
+        <input type="radio" name='filtre' value='nb_coup' id="Nb_coups" checked>
+        <label for='Nb_coups'>Nombre de coups</label>
+    </div>
 
-            </select>
 
-            <input type="submit" name="choix_top" class="button" value="Choisir">
+</div>
+
+<div class="button">
+    <button type="submit" name="valider" class="btn btn-light">Valider</button>
+</div>
+
+</form>
+
+<table class="table time">
+        <thead>
+        <tr>
+            <th>Joueur</th>
+            <th>Niveau</th>
+            <th>Meilleur Temps</th>
         
-        </form>
+        </tr>
+
+        </thead>
+       
+        <tbody>
+        <?php for($i=0; $i<count($data); $i++): ?>
     
-    </section>
-
-
-    <section class="w-100">
-
-        <?php if(isset($_POST["top_paire"], $_POST["choix_top"]) && !empty($top_paire)){ ?>
-
-        <table class="table table-dark mx-auto">
-
-            <thead class="thead-dark">
-                <tr>
-                    <th colspan="5">TOP 10 : <?= $top_paire[0]["nb_paires"]?> paires</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr class="titre_top">
-                    <td>Place</td>
-                    <td>Nom</td>
-                    <td>Score</td>
-                    <td>Temps</td>
-                    <td>Nombre de coups</td>
-                </tr>
-
-                <?php for($i=0; $i<($nb_top_paire); $i++) { ?>
+            <tr>
+                <td><?= $data[$i]['login'] ?></td>
+                <td><?= $data[$i]['niveau'] ?></td>
+                <td><?= $data[$i]['time'] ?></td>
                 
-                <tr>
-                    <td class="place"># <?= ($i+1)?></td>
-                    <td><?=$top_paire[$i]['username']?></td>
-                    <td class="score"><?=$top_paire[$i]['score']?></td>
-                    <td><?= number_format($top_paire[$i]['temps'], 3)?></td>
-                    <td><?=$top_paire[$i]['nb_coups']?></td>
-                </tr>                            
-                            <?php } ?>
-            </tbody>
-        </table>
+            </tr>
+        <?php endfor?>
 
-    <?php } else if(isset($_POST["top_paire"], $_POST["choix_top"]) && empty($top_paire)) { ?>
-    
-     <p class="alert alert-info">Il n'y a pas encore de score disponible</p>
-    
-     <?php } ?>
-    </section>
+        </tbody>
+        
+</table>
 
-</section>
+<table class="table score">
+        <thead>
+        <tr>
+            <th>Joueur</th>
+            <th>Niveau</th>
+            <th>Nombre de coup</th>
+        
+        </tr>
+
+        </thead>
+       
+        <tbody>
+        <?php for($i=0; $i<count($data); $i++): ?>
+    
+            <tr>
+                <td><?= $data[$i]['login'] ?></td>
+                <td><?= $data[$i]['niveau'] ?></td>
+                <td><?= $data[$i]['nb_coup'] ?></td>
+                
+            </tr>
+        <?php endfor?>
+
+        </tbody>
+        
+</table>
+
+
+
+
 
 </main>
 

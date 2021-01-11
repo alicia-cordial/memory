@@ -8,13 +8,12 @@ body {
     min-height: 100vh;
     width: 100%;
     flex-direction: column;
-    /*background-image: url("../src/stars_background.gif");*/
+    background-image: url("../src/stars_background.gif");
 }
 
 main {
     flex: 1 0 auto;
 }
-
 
 a {
     color: #ab47bc;
@@ -24,6 +23,7 @@ a:hover {
     color: white;
     transition: 0.5s;
 }
+
 .imgcard {
     max-width: 100px;
 }
@@ -42,10 +42,9 @@ a:hover {
 .cardbutton:hover {
     border: 1px solid #ab47bc;
 }
+
 table {
-
     border-collapse: collapse;
-
 }
 
 footer li {
@@ -59,6 +58,7 @@ footer li {
 .navlink {
     transition: 0.5s;
 }
+
 .navlink:hover {
     background-color: #ab47bc;
 }
@@ -66,14 +66,15 @@ footer li {
 .activepage {
     background-color: #801A92;
 }
+
 .disabled {
-    pointer-events:none;
+    pointer-events: none;
     opacity: 0.7;
 }
-
 
 .buttonlevel {
     margin-bottom: 20px;
 }
+
 
 /*.buttonlevel:hover {}*/
