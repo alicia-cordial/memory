@@ -26,12 +26,6 @@ class database
     }
 
 
-    //Déconnexion
-    public function disconnect()
-    {
-        $this->connection = NULL;
-    }
-
     //Exécution d'une requête
     public function Execute($statement = '', $parameters = [])
     {
