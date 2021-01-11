@@ -1,21 +1,16 @@
 <?php
 
-
-
 require_once '../classes/user.php';
 require_once '../classes/validator.php';
-require_once '../classes/database.php';
 require_once '../classes/score.php';
 
-$titre = 'profil';
+
 
 session_start();
 
-$pdo = new database("localhost","memory", "root","");
-$user = new user;
+$titre = 'profil';
 
-$score_user= new score;
-$validator = new validator;
+$user = new user;
 
 
 
@@ -23,35 +18,62 @@ if(isset($_SESSION['user'])){
 
   $user = $_SESSION['user'];
 
-
   if(isset($_POST['formprofil'])){
-  
 
-   $_POST['login'] = htmlspecialchars($login);
-  $password = $_POST['password'];
+    $validator = new validator;
+  
+  $login = htmlspecialchars($_POST['login']);
+  $password =  $_POST['password'];
   $password2 = $_POST['password2'];
  
+  if($validator->userExists($login) == 1){
 
-  if($validator->sameLogin($login)){
+    if($validator->sameLogin($login, $user->getLogin()) == 0){
 
-    $validator->passwordConfirm($login, $password);
+    $errors[] = "Ce login est déjà pris.";
+    } 
+}
+
+  if($validator->passwordConfirm($password, $password2) == 0){
+
+  $errors[] = "Les mots ne correspondent pas";
   }
 
-
+  if (empty($errors)) {
   $user->update($login, $password);
-  var_dump($user);
+  $success = "Votre compte a bien été modifié.  <a href='level.php'>Commencer une partie</a>";
 }
+var_dump($user->update($login, $password));
+}
+
 
 }
 
 ?>
 
 
-<?php include '../includes/header.php'; ?>
+
+<?php //include '../includes/header.php'; ?>
 
 <main class="valign-wrapper"> 
     
 <div class="row">
+
+<?php if (!empty($errors)): ?>
+            <div>
+                <?php foreach ($errors as $error) {
+                    echo '<p class="red-text">' . $error . '</p>';
+                } ?>
+            </div>
+        <?php elseif (isset($success)): ?>
+            <div>
+                <?php {
+                    echo '<p class="green-text">' . $success . '</p>';
+                } ?>
+            </div>
+  <?php endif; ?>
+
+
   <form class="col s12" action="profil.php" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="input-field col s12">

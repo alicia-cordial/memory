@@ -15,6 +15,12 @@ class User{
         $this->pdo = new database();
     }
 
+   // DESTRUCTION
+
+   public function __destruct()
+   {
+       $this->pdo = NULL;
+   }
 
 
 //S'ENREGISTRER
@@ -25,6 +31,7 @@ class User{
             'login' => $login,
             'password' => password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]),
         ]);
+
     return $login;
     } 
 
@@ -53,16 +60,14 @@ return $requser;
 
 function update($login, $password)
 {
-
-
-
     $update = $this->pdo->Update("Update utilisateurs set login = :login, password = :password where id = $this->id ",[
         'login' => $login,
         'password' => $password,
     ]);
 
+    return $update;
+    }
 
-}
 
 //GETID
 

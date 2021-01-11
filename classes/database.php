@@ -68,6 +68,7 @@ class database
         try {
 
             $this->Execute($statement, $parameters);
+            return true;
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
