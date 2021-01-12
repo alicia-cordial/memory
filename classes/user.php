@@ -4,10 +4,10 @@ require_once('database.php');
 require_once('validator.php');
 
 
-class User{
+class User
+{
     private $id;
     private $login;
-    private $password;
     private $pdo;
 
     function __construct()
@@ -15,92 +15,67 @@ class User{
         $this->pdo = new database();
     }
 
-   // DESTRUCTION
-
-   public function __destruct()
-   {
-       $this->pdo = NULL;
-   }
-
 
 //S'ENREGISTRER
 
- function register($login, $password){
+    function register($login, $password)
+    {
 
-    $register = $this->pdo->Insert('Insert into utilisateurs (login, password) values ( :login , :password )', [
+        $register = $this->pdo->Insert('Insert into utilisateurs (login, password) values ( :login , :password )', [
             'login' => $login,
             'password' => password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]),
         ]);
-
-    return $login;
-    } 
-
+        return $login;
+    }
 
 
 //SE CONNECTER
 
-function connect($login, $password){
+    function connect($login)
+    {
 
-  
-    $this->login = $login;
-    $this->password = $password;
 
-    $requser = $this->pdo->Select( 'Select * FROM utilisateurs WHERE login = :login AND password = :password ' , [
-        'login' => $login,
-        'password' => $password,
-    ]);
+        $requser = $this->pdo->Select('Select * FROM utilisateurs WHERE login = :login',
+            ['login' => $login,]);
 
-    $this->id = $requser[0]['id'];
+        $this->id = $requser[0]['id'];
+        $this->login = $requser[0]['login'];
 
-return $requser;
+        return $requser;
 
-}
+    }
 
 //UPDATE
 
-function update($login, $password, $id)
-{
-    $update = $this->pdo->Update("Update utilisateurs SET login = :login, password = :password WHERE id = :id ",[
-        'login' => $login,
-        'password' => $password,
-        'id' => $id,
-    ]);
-
-    return $update;
+    function update($login, $password)
+    {
+        $this->pdo = new database();
+        $this->login = $login;
+        $update = $this->pdo->Update("Update utilisateurs SET login = :login, password = :password WHERE id = $this->id ",
+            ['login' => $login,
+            'password' => password_hash($password, PASSWORD_BCRYPT, ["cost" => 10])
+            ]);
+        return $update;
     }
 
 
 //GETID
 
 
-function getId(){
-    return $this->id;
+    function getId()
+    {
+        return $this->id;
     }
-    
-        
+
 
 //GETLOGIN
 
-function getLogin(){
-    return $this->login;
+    function getLogin()
+    {
+        return $this->login;
     }
 
 
-
-//DECONNEXION
-
-function disconnect(){ 
-    
-    $this->id = NULL;
-    $this->login = NULL;
-    $this->password = NULL;
-    $this->pdo = NULL;
-
-    
 }
-
-
-}
-
 
 ?>

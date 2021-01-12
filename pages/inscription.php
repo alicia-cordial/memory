@@ -3,7 +3,6 @@ $titre = 'inscription';
 require_once '../classes/user.php';
 require_once '../classes/validator.php';
 session_start();
-$user = new user;
 
 
 if (isset($_POST['forminscription'])) {
@@ -22,13 +21,16 @@ if (isset($_POST['forminscription'])) {
     if ($validator->passwordStrenght($password) == 0) {
         $errors[] = "Le mot de passe doit comporter au moins un chiffre.";
     }
+
     if (empty($errors)) {
+        $user = new user();
         $user->register($login, $password);
         $success = "Votre compte a bien été créé. <a href='connexion.php'>Me connecter</a>";
     }
 
 }
 ?>
+
 <html lang="en">
 
 <?php include '../includes/header.php'; ?>
@@ -38,6 +40,7 @@ if (isset($_POST['forminscription'])) {
     <!--FORMULAIRE-->
     <div class="row">
         <h3 class="center">INSCRIPTION</h3>
+
         <?php if (!empty($errors)): ?>
             <div>
                 <?php foreach ($errors as $error) {
