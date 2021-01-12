@@ -61,37 +61,48 @@ if(isset($_SESSION['user'])){
 
 <main class="valign-wrapper"> 
 
+
+
+
+<!--DIFFERENTS NIVEAUX-->
+
 <div class="div_tableau1">
 <?php
 $pairsmin = 3; // min niveau
 $pairsmax = 12; // max niveau
-
+/*
 if (isset($_POST['submit'])) {
    $_SESSION['level'] = $_POST['submit']; //sauvegarde le choix du niveau dans la session
     
 }
-
-//if(isset($_POST['valider'])){
-  //$nb_paires = intval($_POST['nb_paires']);
-  //$_SESSION['nb_paires'] = $nb_paires ;
-  //$_SESSION['level'] = $_POST['nb_paires'] . " " .'paires';
+*/
+if(isset($_POST['valider'])){
+  $nb_paires = intval($_POST['nb_paires']);
+  $_SESSION['nb_paires'] = $nb_paires ;
+  $_SESSION['level'] = $_POST['nb_paires'] . " " .'paires';
   //header('Location:memory.php?start');
-
-//}
+}
 ?>
 
+
+
+
+<!--TABLEAUX TOP PERSO-->
+
+
+
 <form action="" method="post">
-        <select name="nb_paires">
+  <select name="nb_paires">
 
-        <?php for($i=3; $i<=12; ++$i):?>
-            <option value=<?= $i ?> ><?= $i ?> paires</option>
-        <?php endfor ?>
+  <?php for($i=3; $i<=12; ++$i):?>
+      <option value=<?= $i ?> ><?= $i ?> paires</option>
+  <?php endfor ?>
 
-        </select>
+  </select>
 
-        <button type="submit" name="valider">Valider</button>
+  <button type="submit" name="valider">Valider</button>
 
-        </form>
+  </form>
 <?php
 
 $bdd = new PDO('mysql:host=localhost;dbname=memory', 'root', '');
@@ -150,19 +161,28 @@ if (isset($erreur))
 <div class="row">
 
 <?php if (!empty($errors)): ?>
-            <div>
-                <?php foreach ($errors as $error) {
-                    echo '<p class="red-text">' . $error . '</p>';
-                } ?>
-            </div>
-        <?php elseif (isset($success)): ?>
-            <div>
-                <?php {
-                    echo '<p class="green-text">' . $success . '</p>';
-                } ?>
-            </div>
+    <div>
+        <?php foreach ($errors as $error) {
+            echo '<p class="red-text">' . $error . '</p>';
+        } ?>
+    </div>
+<?php elseif (isset($success)): ?>
+    <div>
+        <?php {
+            echo '<p class="green-text">' . $success . '</p>';
+        } ?>
+    </div>
   <?php endif; ?>
 
+
+
+
+
+
+
+
+
+<!--FORMULAIRE UPDATE-->
 
   <form class="col s12" action="profil.php" method="post" enctype="multipart/form-data">
     <div class="row">
