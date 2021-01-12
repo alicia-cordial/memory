@@ -33,35 +33,28 @@ if(isset($_SESSION['user'])){
 
         $errors[] = "Ce login est déjà pris.";
       } 
-  }
+    }
 
-  if($validator->passwordConfirm($password, $password2) == 0){
+    if($validator->passwordConfirm($password, $password2) == 0){
 
-    $errors[] = "Les mots ne correspondent pas";
-  }
+      $errors[] = "Les mots ne correspondent pas";
+    }
 
-  if (empty($errors)) {
+    if (empty($errors)) {
     
-    $user->update($login, $password, $user->getLogin());
-    $success = "Votre compte a bien été modifié.  <a href='level.php'>Commencer une partie</a>";
+      $user->update($login, $password, $user->getLogin());
+      $success = "Votre compte a bien été modifié.  <a href='level.php'>Commencer une partie</a>";
+    }
+
   }
-  
-
-}
-
 
 }
 
 ?>
 
-
-
-
-<?php// include '../includes/header.php'; ?>
+<?php include '../includes/header.php'; ?>
 
 <main class="valign-wrapper"> 
-
-
 
 
 <!--DIFFERENTS NIVEAUX-->
@@ -85,11 +78,7 @@ if(isset($_POST['valider'])){
 ?>
 
 
-
-
 <!--TABLEAUX TOP PERSO-->
-
-
 
 <form action="" method="post">
   <select name="nb_paires">
@@ -153,7 +142,6 @@ if (isset($erreur))
 }
 ?>
 
-
 </div>
 
             
@@ -173,10 +161,6 @@ if (isset($erreur))
         } ?>
     </div>
   <?php endif; ?>
-
-
-
-
 
 
 
@@ -221,20 +205,8 @@ if (isset($erreur))
     </form>
 </div>
 
-
-
 </main>
 
 
 <?php include '../includes/footer.php'; ?>
 
-<!-- Compiled and minified JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.sidenav').sidenav();
-    });
-</script>
-</body>
-</html>
