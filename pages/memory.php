@@ -91,6 +91,8 @@ if (isset($_POST['carte'])) {
         ?>
         </table>
     </div>
+
+
 </main>
 
 <?php include '../includes/footer.php'; ?>
