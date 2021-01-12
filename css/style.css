@@ -10,7 +10,7 @@ body {
     min-height: 100vh;
     width: 100%;
     flex-direction: column;
-    background-image: url("../src/stars_background.gif");
+    /*background-image: url("../src/stars_background.gif");*/
 }
 
 main {
@@ -25,6 +25,7 @@ main {
 
 table {
     border-collapse: collapse;
+    width: 50%;
 }
 
 a {
@@ -175,12 +176,19 @@ footer li:hover {
     border: 1px solid white;
     opacity: 0.5;
     transition: 0.4s;
+    border-radius: 10px;
 }
 
 .buttonlevel:hover {
     opacity: 1;
+    box-shadow: 0 0 15px white;
 }
 
+/*Wall of Fame*/
+
+#tableFame {
+    background: rgba(171, 71, 188, 0.6);
+}
 
 /*Responsive*/
 
