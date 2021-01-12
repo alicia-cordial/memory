@@ -11,31 +11,8 @@ $titre = 'profil';
 
 $bd = new Database("localhost","memory2", "root","");
 
+
 $user = new user;
-
-
-
-if(isset($_SESSION['user'])){
-  
-  $user = $_SESSION['user'];
-
-  $score = new score;
-
-  if($score->scorebyLevel($level)==1){
-    
-    $result = $user->getLogin();
-    echo '<table>';
-  }
-
-
-
-
-
-}
-
-
-
-
 
 
 if(isset($_SESSION['user'])){
@@ -65,7 +42,7 @@ if(isset($_SESSION['user'])){
 
   if (empty($errors)) {
     
-    $user->update($login, $password, $user['id']);
+    $user->update($login, $password, $user->getLogin());
     $success = "Votre compte a bien été modifié.  <a href='level.php'>Commencer une partie</a>";
   }
   
@@ -80,41 +57,92 @@ if(isset($_SESSION['user'])){
 
 
 
-<?php include '../includes/header.php'; ?>
+<?php// include '../includes/header.php'; ?>
 
 <main class="valign-wrapper"> 
 
 <div class="div_tableau1">
-  <h3>Tableau des scores</h3>
-  <table class="table table-dark table-hover table_profil">
-      
-      <thead>
-          <tr>
-              <th>Niveau</th>
-              <th>Meilleur Temps</th>
-              <th>Nombre de coup</th>
-          
-          </tr>
+<?php
+$pairsmin = 3; // min niveau
+$pairsmax = 12; // max niveau
 
-      </thead>
+if (isset($_POST['submit'])) {
+   $_SESSION['level'] = $_POST['submit']; //sauvegarde le choix du niveau dans la session
+    
+}
 
-      <tbody>
-  
+//if(isset($_POST['valider'])){
+  //$nb_paires = intval($_POST['nb_paires']);
+  //$_SESSION['nb_paires'] = $nb_paires ;
+  //$_SESSION['level'] = $_POST['nb_paires'] . " " .'paires';
+  //header('Location:memory.php?start');
 
-          <?php for($i=0; $i<count($result); $i++): ?>
+//}
+?>
 
-          <tr>
-              <td><?= $result[$i]['niveau'] ?></td>
-              <td><?= $result[$i]['time'] ?></td>
-              <td><?= $result[$i]['nb_coup'] ?></td>
-  
-          </tr>
-          <?php endfor?>
-  
+<form action="" method="post">
+        <select name="nb_paires">
 
-      </tbody>
-  
-  </table>
+        <?php for($i=3; $i<=12; ++$i):?>
+            <option value=<?= $i ?> ><?= $i ?> paires</option>
+        <?php endfor ?>
+
+        </select>
+
+        <button type="submit" name="valider">Valider</button>
+
+        </form>
+<?php
+
+$bdd = new PDO('mysql:host=localhost;dbname=memory', 'root', '');
+
+
+
+$requser = $bdd->prepare("SELECT login, score.id as 'n°', niveau, time as 'chrono', nb_coup as 'coups' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau ORDER BY score.nb_coup ASC LIMIT 10");
+$requser->execute();
+
+$i=0;
+
+echo "<table>" ;
+
+while ($result = $requser->fetch(PDO::FETCH_ASSOC))
+{
+    if ($i == 0)
+  {
+
+    foreach ($result as $key => $value)
+    {
+      echo "<th>$key</th>";
+    }
+    $i++;
+
+  }
+
+  echo "<tr>";
+  foreach ($result as $key => $value) {
+    if ($key == "login"){
+      date_default_timezone_set('Europe/Paris');
+      $value =  date("d-m-Y", strtotime($value));  ;
+    echo "<td>$value</td>";
+    }
+    else
+      echo "<td>" .nl2br($value). "</td>";
+  }
+  echo "</tr>";
+}
+
+echo "</table>";
+
+ ?>
+
+<?php
+if (isset($erreur))
+{
+  echo $erreur;
+}
+?>
+
+
 </div>
 
             

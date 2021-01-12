@@ -28,7 +28,7 @@ $userinfo = $requser->fetch();
 
 <?php
 
-$requser = $bdd->prepare("SELECT login, niveau, nb_coup as 'nombre de coups' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau  ORDER BY score.nb_coup ASC LIMIT 10 ");
+$requser = $bdd->prepare("SELECT login, score.id as 'partie n°', niveau, nb_coup as 'nombre de coups' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau  ORDER BY score.nb_coup ASC LIMIT 10 ");
 $requser->execute();
 
 $i=0;
@@ -78,7 +78,7 @@ if (isset($erreur))
 
 <?php
 
-$requser = $bdd->prepare("SELECT login, niveau, time as 'chrono'  FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau ORDER BY score.time ASC LIMIT 10");
+$requser = $bdd->prepare("SELECT login, score.id as 'partie n°', niveau, time as 'chrono'  FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau ORDER BY score.time ASC LIMIT 10");
 $requser->execute();
 
 $i=0;

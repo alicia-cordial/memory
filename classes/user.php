@@ -60,7 +60,7 @@ return $requser;
 
 function update($login, $password, $id)
 {
-    $update = $this->pdo->Update("Update utilisateurs set login = :login, password = :password where id = :id ",[
+    $update = $this->pdo->Update("Update utilisateurs SET login = :login, password = :password WHERE id = :id ",[
         'login' => $login,
         'password' => $password,
         'id' => $id,
