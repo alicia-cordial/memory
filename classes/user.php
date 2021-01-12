@@ -51,18 +51,19 @@ function connect($login, $password){
     ]);
 
     $this->id = $requser[0]['id'];
-  
+
 return $requser;
 
 }
 
 //UPDATE
 
-function update($login, $password)
+function update($login, $password, $id)
 {
-    $update = $this->pdo->Update("Update utilisateurs set login = :login, password = :password where id = $this->id ",[
+    $update = $this->pdo->Update("Update utilisateurs set login = :login, password = :password where id = :id ",[
         'login' => $login,
         'password' => $password,
+        'id' => $id,
     ]);
 
     return $update;

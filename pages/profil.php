@@ -4,13 +4,37 @@ require_once '../classes/user.php';
 require_once '../classes/validator.php';
 require_once '../classes/score.php';
 
-
-
 session_start();
 
 $titre = 'profil';
 
+
+$bd = new Database("localhost","memory2", "root","");
+
 $user = new user;
+
+
+
+if(isset($_SESSION['user'])){
+  
+  $user = $_SESSION['user'];
+
+  $score = new score;
+
+  if($score->scorebyLevel($level)==1){
+    
+    $result = $user->getLogin();
+    echo '<table>';
+  }
+
+
+
+
+
+}
+
+
+
 
 
 
@@ -22,28 +46,30 @@ if(isset($_SESSION['user'])){
 
     $validator = new validator;
   
-  $login = htmlspecialchars($_POST['login']);
-  $password =  $_POST['password'];
-  $password2 = $_POST['password2'];
+    $login = htmlspecialchars($_POST['login']);
+    $password =  $_POST['password'];
+    $password2 = $_POST['password2'];
  
-  if($validator->userExists($login) == 1){
+    if($validator->userExists($login) == 1){
 
-    if($validator->sameLogin($login, $user->getLogin()) == 0){
+      if($validator->sameLogin($login, $user->getLogin()) == 0){
 
-    $errors[] = "Ce login est déjà pris.";
-    } 
-}
+        $errors[] = "Ce login est déjà pris.";
+      } 
+  }
 
   if($validator->passwordConfirm($password, $password2) == 0){
 
-  $errors[] = "Les mots ne correspondent pas";
+    $errors[] = "Les mots ne correspondent pas";
   }
 
   if (empty($errors)) {
-  $user->update($login, $password);
-  $success = "Votre compte a bien été modifié.  <a href='level.php'>Commencer une partie</a>";
-}
-var_dump($user->update($login, $password));
+    
+    $user->update($login, $password, $user['id']);
+    $success = "Votre compte a bien été modifié.  <a href='level.php'>Commencer une partie</a>";
+  }
+  
+
 }
 
 
@@ -53,9 +79,45 @@ var_dump($user->update($login, $password));
 
 
 
-<?php //include '../includes/header.php'; ?>
+
+<?php include '../includes/header.php'; ?>
 
 <main class="valign-wrapper"> 
+
+<div class="div_tableau1">
+  <h3>Tableau des scores</h3>
+  <table class="table table-dark table-hover table_profil">
+      
+      <thead>
+          <tr>
+              <th>Niveau</th>
+              <th>Meilleur Temps</th>
+              <th>Nombre de coup</th>
+          
+          </tr>
+
+      </thead>
+
+      <tbody>
+  
+
+          <?php for($i=0; $i<count($result); $i++): ?>
+
+          <tr>
+              <td><?= $result[$i]['niveau'] ?></td>
+              <td><?= $result[$i]['time'] ?></td>
+              <td><?= $result[$i]['nb_coup'] ?></td>
+  
+          </tr>
+          <?php endfor?>
+  
+
+      </tbody>
+  
+  </table>
+</div>
+
+            
     
 <div class="row">
 
