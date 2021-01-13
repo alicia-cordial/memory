@@ -194,7 +194,7 @@ footer li:hover {
 /*Wall of Fame*/
 
 .tableFame {
-    background: rgba(171, 71, 188, 0.6);
+    background: rgba(0, 0, 0, 0.6);
     width: 250px;
     margin-left: auto;
     margin-right: auto;
@@ -203,6 +203,11 @@ footer li:hover {
 .section3 {
     display: flex;
     flex-direction: column;
+}
+
+td,
+th {
+    color: white;
 }
 
 
@@ -220,7 +225,7 @@ footer li:hover {
 }
 
 .tableFame1 {
-    background: rgba(171, 71, 188, 0.6);
+    background: rgba(0, 0, 0, 0.6);
     width: 400px;
 }
 
