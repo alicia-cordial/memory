@@ -10,7 +10,7 @@ body {
     min-height: 100vh;
     width: 100%;
     flex-direction: column;
-    /*background-image: url("../src/stars_background.gif");*/
+    background-image: url("../src/stars_background.gif");
 }
 
 main {
@@ -30,6 +30,12 @@ table {
 
 a {
     color: #ab47bc;
+}
+
+h1,
+h3,
+h5 {
+    color: white;
 }
 
 
@@ -189,6 +195,32 @@ footer li:hover {
 
 .tableFame {
     background: rgba(171, 71, 188, 0.6);
+    width: 250px;
+}
+
+.section3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/*profil tableaux personels*/
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.section1 {
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.tableFame1 {
+    background: rgba(171, 71, 188, 0.6);
+    width: 400px;
 }
 
 

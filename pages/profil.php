@@ -45,6 +45,8 @@ if (isset($_POST['submit'])) { //niveau sélectionné
 <?php if (isset($level)) : ?> <!--Affichage scores du niveau sélectionné-->
     <h3 class='white-text center'>Niveau : <?php echo $level; ?> </h3>
 
+    <section class="section">
+      <section class="section1">
     <?php
     foreach ($twoTables as $name => $oneTable) { /*Génération tableaux*/
 
@@ -74,37 +76,39 @@ if (isset($_POST['submit'])) { //niveau sélectionné
     }
     ?>
 
+      </section>
 
-<h1>Historique</h1>
+      <section class="section2">
+<h3>Historique</h3>
 <?php
 
 $i = 1;
      
-         echo "<table class='centered tableFame'>";
-        foreach ($historic as $row) {
-            if ($i == 1) {
-                echo "<thead>";
-                foreach ($row as $key => $element) {
-                    echo "<th>" . $key . "</th>";
-                }
-                echo "</thead>";
-                $i = 0;
-            }
-            echo "<tbody>";
-            echo "<tr>";
-            foreach ($row as $cell) {
-                echo "<td>" . $cell . "</td>";
-            }
-            echo "</tr>";
-        }
+  echo "<table class='centered tableFame1'>";
+  foreach ($historic as $row) {
+      if ($i == 1) {
+          echo "<thead>";
+          foreach ($row as $key => $element) {
+              echo "<th>" . $key . "</th>";
+          }
+          echo "</thead>";
+          $i = 0;
+      }
+      echo "<tbody>";
+      echo "<tr>";
+      foreach ($row as $cell) {
+          echo "<td>" . $cell . "</td>";
+      }
+      echo "</tr>";
+  }
 
-        echo "</tbody>";
-        echo "</table>";
+  echo "</tbody>";
+  echo "</table>";
     
     
     ?>
-
-
+      </section>
+  </section>
 
 
 
