@@ -27,7 +27,6 @@ if(isset($_SESSION['user'])){
 
 if (isset($_POST['submit'])) { //niveau sélectionné
     $level = $_POST['submit'];
-    //$scorePerso = $score->scoreUserLevel($level, $user->getId()); // récup scores persos par niveau
     $moves = $score->scoreUserMoves($level, $_SESSION['user']->getId()); //récup scores persos par coups
     $times = $score->scoreUserTime($level, $_SESSION['user']->getId());//récup scores persos par temps
     $twoTables = ['coups' => $moves, 'temps' => $times];
