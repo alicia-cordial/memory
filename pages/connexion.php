@@ -53,13 +53,13 @@ if (isset($_POST['formconnexion'])) {
         <form class="col s12" action="connexion.php" method="post">
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="login" id="login" type="text" name="login" class="validate" required/>
+                    <input placeholder="login" id="login" type="text" name="login" class="validate white-text" required/>
                     <label for="login">Login</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="password" type="password" class="validate" name="password" required/>
+                    <input id="password" type="password" class="validate white-text" name="password" required/>
                     <label for="password">Password</label>
                 </div>
             </div>

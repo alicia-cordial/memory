@@ -26,11 +26,12 @@ if (isset($_POST['submit'])) { //niveau sélectionné
         <?php if (isset($level)) : ?> <!--Affichage scores du niveau sélectionné-->
             <h3 class='white-text center'>Niveau : <?php echo $level; ?> </h3>
 
+            <section class="section3">
             <?php
             foreach ($twoTables as $name => $oneTable) { /*Génération tableaux*/
 
-                echo "<table class='centered' id='tableFame'>";
-                echo "<h5>TOP 10 par " . $name . "</h5>";
+                echo "<table class='centered tableFame'>";
+                echo "<h5 class='white-text center'>TOP 10 par " . $name . "</h5>";
                 $i = 1;
 
                 foreach ($oneTable as $row) {
@@ -55,7 +56,7 @@ if (isset($_POST['submit'])) { //niveau sélectionné
             }
             ?>
 
-
+            </section>
         <?php else : ?> <!--Affichage boutons sélection niveau-->
             <h5 class="white-text"><em>Veuillez sélectionner un nombre de paires</em></h5>
             <form action="walloffame.php" method="post" class="row">
