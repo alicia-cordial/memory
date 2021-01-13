@@ -196,12 +196,13 @@ footer li:hover {
 .tableFame {
     background: rgba(171, 71, 188, 0.6);
     width: 250px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .section3 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 

@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) { //niveau sélectionné
             foreach ($twoTables as $name => $oneTable) { /*Génération tableaux*/
 
                 echo "<table class='centered tableFame'>";
-                echo "<h5>TOP 10 par " . $name . "</h5>";
+                echo "<h5 class='white-text center'>TOP 10 par " . $name . "</h5>";
                 $i = 1;
 
                 foreach ($oneTable as $row) {
