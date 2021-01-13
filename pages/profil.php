@@ -11,7 +11,7 @@ session_start();
 
 <?php include '../includes/header.php'; ?>
 <main class="center">
-<h1>Profil</h1>
+<h1>Profil @<?php echo $_SESSION['user']->getLogin();?></h1>
     <button><a href="update.php">Modifier votre profil</a></button>
 
 

@@ -27,7 +27,7 @@ if (isset($_POST['formprofil'])) {
 
     if ($validator->passwordConfirm($password, $password2) == 0) {
 
-        $errors[] = "Les mots ne correspondent pas";
+        $errors[] = "Les deux mots de passe ne sont pas identiques.";
     }
 
     if ($validator->passwordStrenght($password) == 0) {
@@ -49,7 +49,7 @@ if (isset($_POST['formprofil'])) {
 
 <main class="valign-wrapper">
     <div class="row">
-
+        <h1>MODIFICATIONS PROFIL</h1>
     <?php if (!empty($errors)): ?>
         <div>
             <?php foreach ($errors as $error) {
@@ -66,9 +66,8 @@ if (isset($_POST['formprofil'])) {
 
     <!--FORMULAIRE UPDATE-->
 
-        <h1>MODIFICATIONS PROFIL</h1>
 
-        <form class="col s12" action="profil.php" method="post">
+        <form class="col s12" action="update.php" method="post">
             <div class="row">
                 <div class="input-field col s12">
                     <input placeholder="login" id="login" type="text" name="login" maxlength="20" class="validate"/>
