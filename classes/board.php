@@ -8,6 +8,9 @@ class board
 
     private $pdo;
     private $nbcoups;
+    private $foundpairs;
+    private $time;
+
 
     function __construct()
     {
@@ -51,10 +54,7 @@ class board
     }
 
 
-    //TIMER
-    function timer(){
 
-    }
 }
 
 

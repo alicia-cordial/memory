@@ -1,9 +1,10 @@
 <?php
 session_start();
-unset($_SESSION['gamestarted']);
 unset($_SESSION['deck']);
 unset($_SESSION['game']);
 unset($_SESSION['card1']);
 unset($_SESSION['card2']);
-
+unset($_SESSION['timeStart']);
+unset($_SESSION['timeEnd']);
+unset($_SESSION['level']);
 header('Location:level.php');

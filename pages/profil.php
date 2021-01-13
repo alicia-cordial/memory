@@ -17,6 +17,7 @@ session_start();
 
     <?php
 $score = new score();
+$score->setId($_SESSION['user']->getId());
 
 $pairsmin = 3; // min niveau
 $pairsmax = 12; // max niveau
@@ -27,8 +28,8 @@ if(isset($_SESSION['user'])){
 
 if (isset($_POST['submit'])) { //niveau sélectionné
     $level = $_POST['submit'];
-    $moves = $score->scoreUserMoves($level, $_SESSION['user']->getId()); //récup scores persos par coups
-    $times = $score->scoreUserTime($level, $_SESSION['user']->getId());//récup scores persos par temps
+    $moves = $score->scoreUserMoves($level); //récup scores persos par coups
+    $times = $score->scoreUserTime($level);//récup scores persos par temps
     $twoTables = ['coups' => $moves, 'temps' => $times];
 }
 

@@ -1,12 +1,12 @@
 <?php
 $titre = 'Niveau';
 session_start();
-/*if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])) {
     header("location: connexion.php");
-}*/
-/*if (isset($_SESSION['level'])) {
-    header('location:memory.php');
-}*/
+}
+if (isset($_SESSION['level'])) {
+    header("location:restart.php");
+}
 $pairsmin = 3; // min niveau
 $pairsmax = 12; // max niveau
 

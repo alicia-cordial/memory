@@ -6,10 +6,15 @@ class score
     private $pdo;
     private $id_utilisateur;
 
-    //CONNEXION BDD
+    //CONSTRUCTEUR
     function __construct()
     {
         $this->pdo = new database();
+    }
+
+    function setId($id)
+    {
+        $this->id_utilisateur = $id;
     }
 
     //INSERER SCORE
@@ -40,35 +45,35 @@ class score
 
     //RECUPERER LE MEILLEUR SCORE PERSO DE CHAQUE NIVEAU
 
-    public function scoreUserLevel($level, $id)
+    public function scoreUserLevel($level)
     {
         $topperso = $this->pdo->Select("SELECT niveau, score.id as 'partie n°', nb_coup as 'coups', time as 'temps' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level AND utilisateurs.id = :id ORDER BY score.nb_coup ASC LIMIT 1",
-            ['level' => $level, 'id' => $id]);
+            ['level' => $level, 'id' => $this->id_utilisateur]);
         return $topperso;
     }
 
     //RECUPERER 5 DERNIERS SCORES PERSO
-    public function lastGames($id)
+    public function lastGames()
     {
         $lastgames = $this->pdo->Select("SELECT score.id as 'partie n°', nb_coup as 'coups', time as 'temps' FROM score WHERE id_utilisateur = :id ORDER BY score.id DESC LIMIT 5",
-            ['id' => $id]);
+            ['id' => $this->id_utilisateur]);
         return $lastgames;
     }
 
 
     //RECUPERER 3 DERNIERS MEILLEURS TEMPS PERSO
-    public function scoreUserTime($level, $id)
+    public function scoreUserTime($level)
     {
         $toptimeUser = $this->pdo->Select("SELECT login, score.id as 'partie n°', time as 'temps' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level AND utilisateurs.id = :id ORDER BY time ASC LIMIT 3",
-            ['level' => $level, 'id' => $id]);
+            ['level' => $level, 'id' => $this->id_utilisateur]);
         return $toptimeUser;
     }
 
     //RECUPERER 3 DERNIERS MEILLEURS COUPS PERSO
-    function scoreUserMoves($level, $id)
+    function scoreUserMoves($level)
     {
         $topUserMoves = $this->pdo->Select("SELECT login, score.id as 'partie n°', nb_coup as 'coups' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level AND utilisateurs.id = :id ORDER BY nb_coup ASC LIMIT 3",
-            ['level' => $level, 'id' => $id]);
+            ['level' => $level, 'id' => $this->id_utilisateur]);
         return $topUserMoves;
     }
 
