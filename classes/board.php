@@ -49,6 +49,16 @@ class board
     {
         return $this->foundpairs;
     }
+
+    //SEND TO DATABASE
+    function sendScore(){
+
+    }
+
+    //TIMER
+    function timer(){
+
+    }
 }
 
 
