@@ -1,6 +1,7 @@
 <?php
 $titre = 'Memory';
 require_once('../classes/board.php');
+require_once('../classes/score.php');
 session_start();
 $nbcards = $_SESSION['level'];
 //session_destroy();
@@ -46,6 +47,11 @@ if (isset($_POST['carte'])) {
         $_SESSION['deck'][$_SESSION['card1']]->setStatus('found');
         $_SESSION['deck'][$_POST['carte']]->setStatus('found');
         $success = "Vous avez gagné !";
+        
+        //ESSAI?????
+        $myscore =  new score;
+        $myscore->insertScore( $_SESSION['user']->getId(), $_SESSION['level'], $time, $_SESSION['score'] );
+        
     }
 }
 
