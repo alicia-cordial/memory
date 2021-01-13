@@ -1,125 +1,70 @@
 <?php
+$score = new score();
 
+$pairsmin = 3; // min niveau
+$pairsmax = 12; // max niveau
 
-
-session_start();
-
-$bdd = new PDO('mysql:host=localhost;dbname=memory', 'root', '');
-
-
-if(isset($_SESSION['id'])){
-  
-$requser = $bdd->prepare("SELECT * FROM utilisateurs WHERE id = ?");
-$requser->execute(array($_SESSION['id']));
-$userinfo = $requser->fetch();   
-  }
-
+if (isset($_POST['submit'])) { //niveau sélectionné
+    $level = $_POST['submit'];
+    $moves = $score->scoreByMoves($level); //récup scores persos par coups
+    $times = $score->scoreByTime($level);//récup scores persos par temps
+    $twoTables = ['coups' => $moves, 'temps' => $times];
+}
 
 ?>
 
-<form>
+<!--TABLEAUX TOP PERSO-->
 
-<?php
+    <article class="container">
 
-$requser = $bdd->prepare("SELECT login, niveau, nb_coup, DATE_FORMAT(time, '%i:%s') AS time FROM score inner join utilisateurs  on score.id_utilisateur =  utilisateurs.id WHERE niveau ORDER BY score.nb_coup ASC LIMIT 10");
-$requser->execute();
+<h1 class="white-text center">Progression Personelle</h1>
 
-$i=0;
+<?php if (isset($level)) : ?> <!--Affichage scores du niveau sélectionné-->
+    <h3 class='white-text center'>Niveau : <?php echo $level; ?> </h3>
 
-echo "<table>" ;
+    <?php
+    foreach ($twoTables as $name => $oneTable) { /*Génération tableaux*/
 
-while ($result = $requser->fetch(PDO::FETCH_ASSOC))
-{
-    if ($i == 0)
-  {
+        echo "<table class='centered' id='tableFame'>";
+        echo "<h5>Progression par " . $name . "</h5>";
+        $i = 1;
 
-    foreach ($result as $key => $value)
-    {
-      echo "<th>$key</th>";
+        foreach ($oneTable as $row) {
+            if ($i == 1) {
+                echo "<thead>";
+                foreach ($row as $key => $element) {
+                    echo "<th>" . $key . "</th>";
+                }
+                echo "</thead>";
+                $i = 0;
+            }
+            echo "<tbody>";
+            echo "<tr>";
+            foreach ($row as $cell) {
+                echo "<td>" . $cell . "</td>";
+            }
+            echo "</tr>";
+        }
+
+        echo "</tbody>";
+        echo "</table>";
     }
-    $i++;
-
-  }
-
-  echo "<tr>";
-  foreach ($result as $key => $value) {
-    if ($key == "niveau"){
-      date_default_timezone_set('Europe/Paris');
-      $value =  date("d-m-Y", strtotime($value));  ;
-    echo "<td>$value</td>";
-    }
-    else
-      echo "<td>" .nl2br($value). "</td>";
-  }
-  echo "</tr>";
-}
-
-echo "</table>";
-
- ?>
-
-<?php
-if (isset($erreur))
-{
-  echo $erreur;
-}
-?>
-</form>
-
-<form>
-
-<?php
-
-$requser = $bdd->prepare("SELECT login, niveau, nb_coup, DATE_FORMAT(time, '%i:%s') AS time FROM score inner join utilisateurs  on score.id_utilisateur =  utilisateurs.id WHERE niveau ORDER BY score.nb_coup ASC LIMIT 10");
-$requser->execute();
-
-$i=0;
-
-echo "<table>" ;
-
-while ($result = $requser->fetch(PDO::FETCH_ASSOC))
-{
-    if ($i == 0)
-  {
-
-    foreach ($result as $key => $value)
-    {
-      echo "<th>$key</th>";
-    }
-    $i++;
-
-  }
-
-  echo "<tr>";
-  foreach ($result as $key => $value) {
-    if ($key == "posté"){
-      date_default_timezone_set('Europe/Paris');
-      $value =  date("d-m-Y", strtotime($value));  ;
-    echo "<td>$value</td>";
-    }
-    else
-      echo "<td>" .nl2br($value). "</td>";
-  }
-  echo "</tr>";
-}
-
-echo "</table>";
-
- ?>
-
-<?php
-if (isset($erreur))
-{
-  echo $erreur;
-}
-?>
+    ?>
 
 
 
 
+<!--DIFFERENTS NIVEAUX-->
 
+<?php else : ?> <!--Affichage boutons sélection niveau-->
+    <h5 class="white-text"><em>Veuillez sélectionner un nombre de paires</em></h5>
+    <form action="profil.php" method="post" class="row">
+        <?php for ($i = $pairsmin; $i <= $pairsmax; $i++) : ?>
+                <div class='col'>
+                <button class='black white-text btn-large buttonlevel' type='submit' name='submit' value='<?php echo $i ?>'> <?php echo $i ?> </button>
+                </div>
+        <?php endfor; ?>
+    </form>
+<?php endif; ?>
 
-
-
-
-</form>
+</article>
