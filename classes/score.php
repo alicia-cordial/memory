@@ -55,6 +55,23 @@ class score
         return $lastgames;
     }
 
+
+    //RECUPERER 3 DERNIERS MEILLEURS TEMPS PERSO
+    public function scoreUserTime($level, $id)
+    {
+        $toptimeUser = $this->pdo->Select("SELECT login, score.id as 'partie n°', time as 'temps' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level AND utilisateurs.id = :id ORDER BY time ASC LIMIT 10",
+            ['level' => $level, 'id' => $id]);
+        return $toptimeUser;
+    }
+
+    //RECUPERER 3 DERNIERS MEILLEURS COUPS PERSO
+    function scoreUserMoves($level, $id)
+    {
+        $topUserMoves = $this->pdo->Select("SELECT login, score.id as 'partie n°', nb_coup as 'coups' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level AND utilisateurs.id = :id ORDER BY nb_coup ASC LIMIT 10",
+            ['level' => $level, 'id' => $id]);
+        return $topUserMoves;
+    }
+
 }
 
 //
