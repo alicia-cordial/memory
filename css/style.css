@@ -187,7 +187,7 @@ footer li:hover {
 
 /*Wall of Fame*/
 
-#tableFame {
+.tableFame {
     background: rgba(171, 71, 188, 0.6);
 }
 

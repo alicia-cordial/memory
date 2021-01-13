@@ -47,10 +47,10 @@ class score
         return $topperso;
     }
 
-    //RECUPERER 5 DERNIERS SCORES PERSO
+    //RECUPERER 10 DERNIERS SCORES PERSO
     public function lastGames($id)
     {
-        $lastgames = $this->pdo->Select("SELECT score.id as 'partie n°', nb_coup as 'coups', time as 'temps' FROM score WHERE id_utilisateur = :id ORDER BY score.id DESC LIMIT 5",
+        $lastgames = $this->pdo->Select("SELECT score.id as 'partie n°', niveau, nb_coup as 'coups', time as 'temps' FROM score WHERE id_utilisateur = :id ORDER BY score.id DESC LIMIT 10",
             ['id' => $id]);
         return $lastgames;
     }
@@ -59,7 +59,7 @@ class score
     //RECUPERER 3 DERNIERS MEILLEURS TEMPS PERSO
     public function scoreUserTime($level, $id)
     {
-        $toptimeUser = $this->pdo->Select("SELECT login, score.id as 'partie n°', time as 'temps' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level AND utilisateurs.id = :id ORDER BY time ASC LIMIT 3",
+        $toptimeUser = $this->pdo->Select("SELECT score.id as 'partie n°', time as 'temps' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level AND utilisateurs.id = :id ORDER BY time ASC LIMIT 3",
             ['level' => $level, 'id' => $id]);
         return $toptimeUser;
     }
@@ -67,7 +67,7 @@ class score
     //RECUPERER 3 DERNIERS MEILLEURS COUPS PERSO
     function scoreUserMoves($level, $id)
     {
-        $topUserMoves = $this->pdo->Select("SELECT login, score.id as 'partie n°', nb_coup as 'coups' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level AND utilisateurs.id = :id ORDER BY nb_coup ASC LIMIT 3",
+        $topUserMoves = $this->pdo->Select("SELECT score.id as 'partie n°', nb_coup as 'coups' FROM score inner join utilisateurs on score.id_utilisateur = utilisateurs.id WHERE niveau = :level AND utilisateurs.id = :id ORDER BY nb_coup ASC LIMIT 3",
             ['level' => $level, 'id' => $id]);
         return $topUserMoves;
     }

@@ -30,6 +30,7 @@ if (isset($_POST['submit'])) { //niveau sélectionné
     $moves = $score->scoreUserMoves($level, $_SESSION['user']->getId()); //récup scores persos par coups
     $times = $score->scoreUserTime($level, $_SESSION['user']->getId());//récup scores persos par temps
     $twoTables = ['coups' => $moves, 'temps' => $times];
+    $historic = $score->lastGames($_SESSION['user']->getId());
 }
 
 }
@@ -47,7 +48,7 @@ if (isset($_POST['submit'])) { //niveau sélectionné
     <?php
     foreach ($twoTables as $name => $oneTable) { /*Génération tableaux*/
 
-        echo "<table class='centered' id='tableFame'>";
+        echo "<table class='centered tableFame'>";
         echo "<h5>Progression par " . $name . "</h5>";
         $i = 1;
 
@@ -74,6 +75,37 @@ if (isset($_POST['submit'])) { //niveau sélectionné
     ?>
 
 
+<h1>Historique</h1>
+<?php
+
+$i = 1;
+     
+         echo "<table class='centered tableFame'>";
+        foreach ($historic as $row) {
+            if ($i == 1) {
+                echo "<thead>";
+                foreach ($row as $key => $element) {
+                    echo "<th>" . $key . "</th>";
+                }
+                echo "</thead>";
+                $i = 0;
+            }
+            echo "<tbody>";
+            echo "<tr>";
+            foreach ($row as $cell) {
+                echo "<td>" . $cell . "</td>";
+            }
+            echo "</tr>";
+        }
+
+        echo "</tbody>";
+        echo "</table>";
+    
+    
+    ?>
+
+
+
 
 
 <!--DIFFERENTS NIVEAUX-->
@@ -95,4 +127,3 @@ if (isset($_POST['submit'])) { //niveau sélectionné
 <?php include '../includes/footer.php'; ?>
 
 </html>
-
