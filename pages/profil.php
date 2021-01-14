@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) { //niveau sélectionné
 
     <article class="container">
 
-<h1 class="white-text center">Progression Personelle</h1>
+<h1 class="white-text center">Progression Personnelle</h1>
 
 <?php if (isset($level)) : ?> <!--Affichage scores du niveau sélectionné-->
     <h3 class='white-text center'>Niveau : <?php echo $level; ?> </h3>

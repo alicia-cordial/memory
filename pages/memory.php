@@ -5,11 +5,9 @@ require_once('../classes/score.php');
 require_once('../classes/user.php');
 session_start();
 $myscore = new score();
+
 $myscore->setId($_SESSION['user']->getId());
 $nbcards = $_SESSION['level'];
-//var_dump($_SESSION);
-//session_destroy();
-//$nbcards = 3;
 
 //Initialisation partie
 if (!isset($_SESSION['game'])) {
@@ -80,7 +78,7 @@ if (isset($_POST['carte'])) {
             <?php endif; ?>
         </div>
 
-        <table>
+        <table id="tableMemory">
             <?php
             $i = 1;
             echo "<tr>";
@@ -97,7 +95,7 @@ if (isset($_POST['carte'])) {
                 echo "</td>";
                 $i++;
 
-                if ($i > 5) { // génération row de 5 cartes
+                if ($i > 4) { // génération row de 5 cartes
                     echo "</tr><tr>";
                     $i = 1;
                 }

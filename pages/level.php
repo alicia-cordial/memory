@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 
 <main class="valign-wrapper center-align">
     <div class="container">
-        <h1 class="white-text">Memory</h1>
+        <h1 class="white-text">MEMORY</h1>
         <h5 class="white-text"><em>Veuillez sélectionner un nombre de paires</em></h5>
         <form action="level.php" method="post" class="row">
             <?php for ($i = $pairsmin; $i <= $pairsmax; $i++) {

@@ -175,6 +175,11 @@ footer li:hover {
 }
 
 
+#tableMemory {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /*Level*/
 
 .buttonlevel {
@@ -191,10 +196,10 @@ footer li:hover {
 }
 
 
-/*Wall of Fame*/
+/*TABLEAUX*/
 
 .tableFame {
-    background: rgba(171, 71, 188, 0.6);
+    background: rgba(171, 71, 188, 0.9);
     width: 250px;
     margin-left: auto;
     margin-right: auto;
@@ -206,7 +211,7 @@ footer li:hover {
 }
 
 
-/*profil tableaux personels*/
+/*profil tableaux personnels*/
 
 .section {
     display: flex;

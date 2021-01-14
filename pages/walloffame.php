@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) { //niveau sélectionné
 <main id="main_fame">
     <article class="container">
 
-        <h1 class="white-text center">Wall of fame</h1>
+        <h1 class="white-text center">WALL OF FAME</h1>
 
         <?php if (isset($level)) : ?> <!--Affichage scores du niveau sélectionné-->
             <h3 class='white-text center'>Niveau : <?php echo $level; ?> </h3>
@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) { //niveau sélectionné
 
             </section>
         <?php else : ?> <!--Affichage boutons sélection niveau-->
-            <h5 class="white-text"><em>Veuillez sélectionner un nombre de paires</em></h5>
+            <h5 class="white-text center"><em>Veuillez sélectionner un nombre de paires</em></h5>
             <form action="walloffame.php" method="post" class="row">
                 <?php for ($i = $pairsmin; $i <= $pairsmax; $i++) : ?>
                         <div class='col'>
