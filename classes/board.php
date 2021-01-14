@@ -1,16 +1,12 @@
 <?php
-
 require_once('database.php');
 require_once('card.php');
 
 class board
 {
-
     private $pdo;
     private $nbcoups;
     private $foundpairs;
-    private $time;
-
 
     function __construct()
     {
@@ -19,10 +15,10 @@ class board
         $this->foundpairs = 1;
     }
 
-
+    //Crée le deck (chaque carte est une instance de la classe card)
     public function createGame($nbcards)
     {
-        $pairs1 = $this->pdo->Select("SELECT * FROM cards  LIMIT $nbcards");
+        $pairs1 = $this->pdo->Select("SELECT * FROM cards ORDER BY rand() LIMIT $nbcards");
         $pairs2 = $pairs1;
         $deck = array_merge($pairs1, $pairs2);
         shuffle($deck);
@@ -52,9 +48,6 @@ class board
     {
         return $this->foundpairs;
     }
-
-
-
 }
 
 

@@ -1,5 +1,16 @@
-/*Général*/
+/*CSS
+1 - Général
+2 - Nav
+3 - Footer
+4 - Accueil
+5 - Jeu mémory
+6 - Level
+7 - Wall of fame
+8 - Profil
+9 - Responsive
+*/
 
+/*1 - Général*/
 html {
     width: 100%;
     height: 100%;
@@ -7,40 +18,35 @@ html {
 
 body {
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
     width: 100%;
-    flex-direction: column;
-    background-image: url("../src/stars_background.gif");
+    background: black url("../src/stars_background.gif");
 }
 
 main {
     flex: 1 0 auto;
+    min-height: 60vh;
 }
 
-#mainIndex {
-    height: 60vh;
+.mainSpace {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
-table {
-    border-collapse: collapse;
-    width: 50%;
-}
 
+/*Typo*/
 a {
     color: #ab47bc;
 }
 
-h1,
-h3,
-h5 {
+h1, h3, h5, h6, th, td {
     color: white;
 }
 
 
-/*Nav*/
-
+/* 2 - Nav*/
 .nav-wrapper {
     padding: 0 20px 0 20px;
 }
@@ -63,8 +69,7 @@ h5 {
 }
 
 
-/*Footer*/
-
+/* 3 - Footer*/
 footer ul {
     display: flex;
     flex-direction: column;
@@ -81,7 +86,13 @@ footer li:hover {
 }
 
 
-/*Accueil*/
+/*4 - Accueil*/
+
+#mainIndex {
+    display: flex;
+    height: 60vh;
+    align-items: center;
+}
 
 #mainIndex section {
     display: flex;
@@ -104,21 +115,18 @@ footer li:hover {
     height: 100%;
 }
 
+/*Animation cartes accueil*/
+
 .containertarotCard img {
     max-height: 100%;
     max-width: 100%;
 }
 
-
-/*Animation cartes qui se tournent*/
-
 .containertarotCard {
     perspective: 1000px;
 }
 
-.front,
-.back,
-.flipper {
+.front, .back, .flipper {
     width: 100%;
     height: 100%;
 }
@@ -133,8 +141,7 @@ footer li:hover {
     transform: rotateY(180deg);
 }
 
-.front,
-.back {
+.front, .back {
     backface-visibility: hidden;
     position: absolute;
     top: 0;
@@ -153,35 +160,41 @@ footer li:hover {
 }
 
 
-/*Cartes Mémory*/
-
-.imgcard {
-    max-width: 100px;
-}
-
-.imgfound {
-    opacity: 0.2;
-}
-
-.cardbutton {
-    padding: 0;
-    border: 1px solid black;
-    background: none;
-    transition: 0.5s;
-}
-
-.cardbutton:hover {
-    border: 1px solid #ab47bc;
-}
+/*5 - Jeu mémory */
 
 #tableMemory {
     margin-left: auto;
     margin-right: auto;
 }
 
+.imgcard {
+    width: 130px;
+    min-width: 70px;
+    max-width: 100%;
+    height: auto;
+}
 
-/*Level*/
+.imgfound {
+    opacity: 0.3;
+}
 
+.cardbutton {
+    padding: 0;
+    background: none;
+    border: none;
+    transition: 0.7s;
+}
+
+.cardbutton:hover {
+    filter: drop-shadow(0 0 10px grey);
+}
+
+#formMemory {
+    margin: 0;
+}
+
+
+/*6 - Boutons Level*/
 .buttonlevel {
     margin-bottom: 20px;
     border: 1px solid white;
@@ -196,49 +209,52 @@ footer li:hover {
 }
 
 
-/*TABLEAUX*/
-
-.tableFame {
-    background: rgba(171, 71, 188, 0.9);
-    width: 250px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.section3 {
-    display: flex;
-    flex-direction: column;
-}
-
-td,
-th {
-    color: white;
-}
-
-
-/*profil tableaux personnels*/
-
-.section {
+/*7 - Wall of fame*/
+.sectionFame {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.section1 {
-    margin-right: 20px;
-    margin-top: 20px;
+.tableFame {
+    background: rgba(0, 0, 0, 0.8);
+    width: 250px;
+    margin: 0 auto;
 }
 
-.tableFame1 {
-    background: rgba(0, 0, 0, 0.6);
+.divtableFame {
+    border: 1px solid grey;
+    margin: 10px;
+}
+
+
+/*8 - profil*/
+.sectionProfil {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.tablesProfil {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tableHistoric {
     width: 400px;
+    margin: 0 auto;
 }
 
+.sectionHistoric {
+    border: 1px solid grey;
+    background: rgba(0, 0, 0, 0.6);
+}
 
 /*Responsive*/
-
 @media screen and (max-width: 640px) {
-    #mainIndex {
+    #mainIndex, .sectionProfil, .sectionFame {
         flex-direction: column;
     }
 }

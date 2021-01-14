@@ -32,40 +32,35 @@ if (isset($_POST['forminscription'])) {
 ?>
 
 <html lang="en">
-
 <?php include '../includes/header.php'; ?>
 
-<main class="valign-wrapper">
+<main class="valign-wrapper container">
+    <article class="row">
+        <h3 class="center"><em>Inscription</em></h3>
 
-    <!--FORMULAIRE-->
-    <div class="row">
-        <h3 class="center">INSCRIPTION</h3>
-
+        <!--Alerte (erreur ou succès)-->
         <?php if (!empty($errors)): ?>
             <div>
                 <?php foreach ($errors as $error) {
                     echo '<p class="red-text">' . $error . '</p>';
-                } ?>
+                }
+                ?>
             </div>
         <?php elseif (isset($success)): ?>
             <div>
-                <?php {
-                    echo '<p class="green-text">' . $success . '</p>';
-                } ?>
+                <p class="white-text"><?php echo $success; ?></p>
             </div>
         <?php endif; ?>
 
+        <!--Formulaire-->
         <form class="col s12" action="inscription.php" method="post">
             <div class="row">
                 <div class="input-field col s12">
                     <input placeholder="login" id="login" type="text" name="login" class="validate white-text"
-                           value="<?php if (isset($login)) {
-                               echo $login;
-                           } ?>" maxlength="20" required/>
+                           value="<?php if (isset($_POST['login'])) { echo htmlspecialchars($_POST['login']);} ?>" maxlength="20" required/>
                     <label for="login">Login</label>
                 </div>
             </div>
-
             <div class="row">
                 <div class="input-field col s12">
                     <input id="password" type="password" class="validate white-text" name="password" maxlength="20" required/>
@@ -73,23 +68,19 @@ if (isset($_POST['forminscription'])) {
                     <span class="helper-text">Le mot de passe doit comporter au moins un chiffre.</span>
                 </div>
             </div>
-
             <div class="row">
                 <div class="input-field col s12">
                     <input id="password2" type="password" class="validate white-text" name="password2" maxlength="20" required/>
                     <label for="password2">Confirmation Password</label>
                 </div>
             </div>
-
             <button class="btn waves-effect waves-light black" type="submit" name="forminscription">Submit
                 <i class="material-icons right">send</i>
             </button>
         </form>
 
-    </div>
-
+    </article>
 </main>
 
 <?php include '../includes/footer.php'; ?>
-
 </html>

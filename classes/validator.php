@@ -1,5 +1,4 @@
 <?php
-
 require_once('database.php');
 require_once('user.php');
 
@@ -14,21 +13,12 @@ class validator
 
 
     //CONSTRUCTION
-
     function __construct()
     {
         $this->pdo = new database();
     }
 
-    // DESTRUCTION
-
-    public function __destruct()
-    {
-        $this->pdo = NULL;
-    }
-
     // vérification login existant
-
     function userExists($login)
     {
         $check = $this->pdo->Select('Select * FROM utilisateurs WHERE login = :login', ['login' => $login]);
@@ -40,7 +30,6 @@ class validator
     }
 
     // vérification passwords identiques
-
     function passwordConfirm($password, $password2)
     {
         if ($password === $password2) {
@@ -51,7 +40,7 @@ class validator
         }
     }
 
-
+    //vérification chiffre dans password
     function passwordStrenght($password)
     {
         if (!preg_match("#[0-9]+#", $password)) {
@@ -61,22 +50,18 @@ class validator
         }
     }
 
-    // vérification update login identique pour éviter un doublon
-
+    // vérification login identique pour éviter un doublon (update)
     function sameLogin($login, $firstlogin)
     {
-
         if ($login != $firstlogin) {
             return 1;
-
         } else {
             return 0;
         }
     }
 
 
-    // vérification bon password connexion
-
+    // vérification bons identifiants connexion
     function passwordConnect($login, $password)
     {
         $checkpassword = $this->pdo->Select('Select password from utilisateurs WHERE login = :login',
@@ -92,9 +77,6 @@ class validator
         } else {
             return 0;
         }
-
     }
 
 }
-
-?>

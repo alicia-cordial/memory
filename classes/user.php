@@ -1,5 +1,4 @@
 <?php
-
 require_once('database.php');
 require_once('validator.php');
 
@@ -16,66 +15,46 @@ class User
     }
 
 
-//S'ENREGISTRER
-
+    //S'ENREGISTRER
     function register($login, $password)
     {
-
-        $register = $this->pdo->Insert('Insert into utilisateurs (login, password) values ( :login , :password )', [
-            'login' => $login,
-            'password' => password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]),
-        ]);
+        $this->pdo->Insert('Insert into utilisateurs (login, password) values ( :login , :password )',
+            ['login' => $login,
+            'password' => password_hash($password, PASSWORD_BCRYPT, ["cost" => 10]),]);
         return $login;
     }
 
-
-//SE CONNECTER
-
+    //SE CONNECTER ET RECUPERER LES DONNEES
     function connect($login)
     {
-
-
         $requser = $this->pdo->Select('Select * FROM utilisateurs WHERE login = :login',
             ['login' => $login,]);
-
         $this->id = $requser[0]['id'];
         $this->login = $requser[0]['login'];
-
         return $requser;
-
     }
 
-//UPDATE
-
+    //UPDATE
     function update($login, $password)
     {
         $this->pdo = new database();
-        $this->login = $login;
         $update = $this->pdo->Update("Update utilisateurs SET login = :login, password = :password WHERE id = $this->id ",
-            ['login' => $login,
-            'password' => password_hash($password, PASSWORD_BCRYPT, ["cost" => 10])
-            ]);
+            ['login' => $login, 'password' => password_hash($password, PASSWORD_BCRYPT, ["cost" => 10])]);
+        $this->login = $login;
         return $update;
     }
 
-
-//GETID
-
-
+    //GETID
     function getId()
     {
         return $this->id;
     }
 
-
-//GETLOGIN
-
+    //GETLOGIN
     function getLogin()
     {
         return $this->login;
     }
 
-
 }
 
-?>

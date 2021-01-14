@@ -18,8 +18,7 @@ class database
         }
     }
 
-    // DESTRUCTION
-
+    //Destruction
     public function __destruct()
     {
         $this->connection = NULL;
@@ -74,17 +73,4 @@ class database
             throw new Exception($e->getMessage());
         }
     }
-
-    //Suppression de données
-    public function Delete($statement = "", $parameters = [])
-    {
-        try {
-
-            $this->Execute($statement, $parameters);
-
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
-    }
-
 }
