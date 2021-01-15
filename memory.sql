@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jan 15, 2021 at 09:38 AM
--- Server version: 5.7.30
--- PHP Version: 7.4.9
+-- Hôte : 127.0.0.1:3306
+-- Généré le : ven. 15 jan. 2021 à 15:36
+-- Version du serveur :  5.7.31
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,22 +18,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `memory`
+-- Base de données : `memory`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cards`
+-- Structure de la table `cards`
 --
 
-CREATE TABLE `cards` (
-  `id` int(11) NOT NULL,
-  `img_url` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `cards`;
+CREATE TABLE IF NOT EXISTS `cards` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `img_url` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `cards`
+-- Déchargement des données de la table `cards`
 --
 
 INSERT INTO `cards` (`id`, `img_url`) VALUES
@@ -52,19 +55,21 @@ INSERT INTO `cards` (`id`, `img_url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `score`
+-- Structure de la table `score`
 --
 
-CREATE TABLE `score` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `score`;
+CREATE TABLE IF NOT EXISTS `score` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_utilisateur` int(11) NOT NULL,
   `niveau` int(11) NOT NULL,
   `nb_coup` int(11) NOT NULL,
-  `time` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `time` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `score`
+-- Déchargement des données de la table `score`
 --
 
 INSERT INTO `score` (`id`, `id_utilisateur`, `niveau`, `nb_coup`, `time`) VALUES
@@ -98,22 +103,26 @@ INSERT INTO `score` (`id`, `id_utilisateur`, `niveau`, `nb_coup`, `time`) VALUES
 (29, 19, 6, 20, '00:00:31'),
 (30, 19, 8, 38, '00:01:05'),
 (31, 20, 5, 20, '00:00:20'),
-(32, 20, 12, 70, '00:01:30');
+(32, 20, 12, 70, '00:01:30'),
+(33, 18, 9, 54, '00:01:11'),
+(34, 18, 3, 8, '00:00:08');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateurs`
+-- Structure de la table `utilisateurs`
 --
 
-CREATE TABLE `utilisateurs` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `utilisateurs`;
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `utilisateurs`
+-- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`id`, `login`, `password`) VALUES
@@ -122,50 +131,7 @@ INSERT INTO `utilisateurs` (`id`, `login`, `password`) VALUES
 (18, 'leo1', '$2y$10$Emar5Rs8Pgl.lA0fXbFu6O00gxSsf4EFQG6ve49GG8O5DXj8cBmca'),
 (19, 'leratfuryo', '$2y$10$KB5wsrxX.U1Lnci9Y/D9N.fX/slPUcwOZNC0bKQcjSYVf1WNVb6Iu'),
 (20, 'Alicia1802', '$2y$10$O6s3dYRKnYFJHWbpUG/gPe6pLnQ6wDth1.K85bljnJba.IrQijfxW');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `cards`
---
-ALTER TABLE `cards`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `score`
---
-ALTER TABLE `score`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `utilisateurs`
---
-ALTER TABLE `utilisateurs`
-  ADD PRIMARY KEY (`id`) USING BTREE;
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `cards`
---
-ALTER TABLE `cards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `score`
---
-ALTER TABLE `score`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- AUTO_INCREMENT for table `utilisateurs`
---
-ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

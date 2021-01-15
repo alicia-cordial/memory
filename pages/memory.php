@@ -7,7 +7,7 @@ session_start();
 if (!isset($_SESSION['user'])) {
     header('location: connexion.php');
 } elseif (!isset($_SESSION['level'])) {
-    header('Location:level.php');
+    header('Location:restart.php');
 }
 
 $myscore = new score();
